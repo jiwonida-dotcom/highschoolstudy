@@ -13,6 +13,7 @@
 | [docs/system-facts.md](docs/system-facts.md) | 2027학년도 고입 내신 200점 체계, 2030학년도 대입(2028 개편) 제도 사실 |
 | [docs/unyang-high-school.md](docs/unyang-high-school.md) | 운양고 확인된 사실 + 입학 전 확인 체크리스트 |
 | [docs/knowledge-files.md](docs/knowledge-files.md) | 모아야 할 지식 파일 목록과 출처 |
+| [index.html](index.html) | 운양고 입학 전 확인 노트 — [확인]/[추정] 구분 정리 + 체크리스트 웹페이지 (GitHub Pages 켜면 https://jiwonida-dotcom.github.io/highschoolstudy/ 에서 열림) |
 
 ## 정보 신뢰도 표기 규칙
 

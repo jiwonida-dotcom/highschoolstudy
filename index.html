@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>운양고 입학 전 확인 노트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --paper:#F7F8F6; --ink:#1B2430; --ink-2:#4A5563; --ink-3:#7C8794;
+  --line:#D8DDD9; --card:#FFFFFF;
+  --green:#1F6F5F; --green-soft:#E3F0EB; --green-ink:#155245;
+  --amber:#B4711A; --amber-soft:#F8EEDC; --amber-ink:#7A4B0E;
+  --blue-soft:#E6ECF4; --blue-ink:#2F4A6E;
+  --done:#9AA5B1;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A1F; --ink:#E8ECEF; --ink-2:#B3BCC5; --ink-3:#7F8A95;
+    --line:#2A333B; --card:#1C242B;
+    --green:#5FB59F; --green-soft:#1B2F2A; --green-ink:#A9DCCB;
+    --amber:#E0A24E; --amber-soft:#332816; --amber-ink:#F0CE96;
+    --blue-soft:#1F2A38; --blue-ink:#A9C0DE;
+    --done:#5C6772;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A1F; --ink:#E8ECEF; --ink-2:#B3BCC5; --ink-3:#7F8A95;
+  --line:#2A333B; --card:#1C242B;
+  --green:#5FB59F; --green-soft:#1B2F2A; --green-ink:#A9DCCB;
+  --amber:#E0A24E; --amber-soft:#332816; --amber-ink:#F0CE96;
+  --blue-soft:#1F2A38; --blue-ink:#A9C0DE;
+  --done:#5C6772;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:15px;line-height:1.65;padding-inline:20px;padding-block:40px 80px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:500}
+h1{font-family:"Noto Serif KR","Nanum Myeongjo",serif;font-weight:700;font-size:clamp(28px,5vw,38px);line-height:1.25;margin:8px 0 12px;text-wrap:balance}
+.lede{color:var(--ink-2);max-width:62ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;font-size:13px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace}
+.meta b{color:var(--ink-2);font-weight:500}
+h2{font-family:"Noto Serif KR",serif;font-size:22px;font-weight:600;margin:56px 0 6px;letter-spacing:-.01em}
+h2 + p.sub{margin:0 0 18px;color:var(--ink-2);font-size:14px}
+.tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:.04em;padding:2px 8px;border-radius:3px;vertical-align:middle}
+.tag.ok{background:var(--green-soft);color:var(--green-ink)}
+.tag.guess{background:var(--amber-soft);color:var(--amber-ink)}
+.tag.gen{background:var(--blue-soft);color:var(--blue-ink)}
+
+.facts{border-top:2px solid var(--ink);margin-top:16px}
+.fact{display:grid;grid-template-columns:140px 1fr;gap:6px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.fact dt{font-weight:700;font-size:14px;color:var(--ink)}
+.fact dd{margin:0;color:var(--ink-2)}
+.fact dd small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:3px}
+@media (max-width:520px){.fact{grid-template-columns:1fr;gap:2px}}
+
+.guess-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.guess-list li{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px 14px;background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:0 4px 4px 0}
+.guess-list .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--amber-ink);white-space:nowrap;padding-top:3px}
+.guess-list p{margin:0;color:var(--ink)}
+.guess-list p em{font-style:normal;color:var(--amber-ink);font-weight:500}
+
+.progress{position:sticky;top:0;z-index:2;background:var(--paper);padding:10px 0;margin:28px 0 8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;font-size:13px}
+.progress .bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.progress .bar i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.progress .n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:64px;text-align:right}
+.progress button{font:inherit;font-size:12px;color:var(--ink-3);background:none;border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer}
+.progress button:hover,.progress button:focus-visible{color:var(--ink);border-color:var(--ink-3);outline:none}
+
+.group{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.group header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.group h3{margin:0;font-size:16px;font-weight:700}
+.group header a{font-size:12.5px;color:var(--green);text-decoration:none;font-family:"IBM Plex Mono",monospace}
+.group header a:hover{text-decoration:underline}
+.group ul{list-style:none;margin:0;padding:6px 8px}
+.group li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:9px 10px;border-radius:4px}
+.group li:hover{background:var(--paper)}
+.group input[type=checkbox]{appearance:none;width:18px;height:18px;margin:3px 0 0;border:1.5px solid var(--ink-3);border-radius:3px;background:var(--card);cursor:pointer;position:relative;flex-shrink:0}
+.group input[type=checkbox]:checked{background:var(--green);border-color:var(--green)}
+.group input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.group input[type=checkbox]:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.group label{cursor:pointer}
+.group label span.why{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.group li.done label{color:var(--done);text-decoration:line-through;text-decoration-color:var(--line)}
+.group li.done label span.why{color:var(--done);text-decoration:none}
+
+.next{margin-top:56px;padding:20px 22px;border:1px dashed var(--green);border-radius:6px;background:var(--green-soft)}
+.next h2{margin:0 0 10px;font-size:18px}
+.next ol{margin:0;padding-left:20px;color:var(--ink)}
+.next li+li{margin-top:6px}
+.sources{margin-top:40px;font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:16px}
+.sources ul{margin:6px 0 0;padding-left:18px}
+.sources a{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.progress .bar i{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow">Unyang High · 2027학년도 입학 준비</div>
+  <h1>운양고 입학 전 확인 노트</h1>
+  <p class="lede">공개 자료로 확인된 사실과 아직 검증되지 않은 인식을 나누어 정리하고, 입학 전에 학생·학부모가 직접 확인해야 할 항목을 체크리스트로 묶었습니다. 체크 상태는 이 기기에만 저장됩니다.</p>
+  <div class="meta">
+    <span>작성 <b>2026-09-13</b></span>
+    <span>대상 <b>2027.3 운양고 입학 예정 중3</b></span>
+    <span>기준 <b>2028 대입개편 · 5등급제</b></span>
+  </div>
+
+  <h2><span class="tag ok">확인</span> 공식 자료·언론 보도로 확인된 사실</h2>
+  <p class="sub">학교 홈페이지, 김포교육지원청, 학교알리미, 김포신문 보도에서 확인한 내용입니다.</p>
+  <dl class="facts">
+    <div class="fact"><dt>기본 정보</dt><dd>2013년 개교, 공립 남녀공학 일반계고. 김포시 운양동(김포한강11로 58).</dd></div>
+    <div class="fact"><dt>규모</dt><dd>약 30학급, 학생 약 1,000명(학급당 약 33명), 교직원 약 68명.<small>2023~2025년 공시 기준 — 학교알리미에서 2026년 수치 재확인</small></dd></div>
+    <div class="fact"><dt>고교학점제 운영</dt><dd>매년 5월 '교육과정 박람회' 개최. 2·3학년 '교육과정 리더'가 과목별 부스에서 후배에게 과목 특징·연계 학과·공부 팁을 안내하고, 선택과목 안내 책자를 배포.<small>2025.5.22 개최, 김포신문 보도</small></dd></div>
+    <div class="fact"><dt>교육과정 다양화</dt><dd>운양고·장기고·김포제일고 3교 연합 공동교육과정, 온·오프라인 강좌, 소인수 과목(무학년제) 운영.<small>2024.11 신입생 입학설명회 보도</small></dd></div>
+    <div class="fact"><dt>특색 프로그램</dt><dd>자율교육과정(16+1), 과학 행사·천체관측 캠프·독서활동, 탐구실천 발표회, 데이터 사이언스 캠프.</dd></div>
+    <div class="fact"><dt>입학설명회</dt><dd>매년 11월경 신입생 대상 입학설명회 개최.<small>2024.11.21 개최, 400명 이상 참석</small></dd></div>
+    <div class="fact"><dt>입학 절차</dt><dd>2026학년도 기준: 반 배정 2월 27일 홈페이지 공개, 입학식 3월 3일 10시, 리로스쿨 사전 로그인 필요, 교과서는 입학식 당일 배부.</dd></div>
+    <div class="fact"><dt>연중 행사</dt><dd>과학의 날(4월), 체육대회(5월), 1학년 수련회(10~11월), 2학년 수학여행, 탐구 실천 발표대회, 동아리 발표대회(12월).</dd></div>
+    <div class="fact"><dt>공개 자료</dt><dd>2022 개정 교육과정 적용 편제표와 과목선택 안내를 홈페이지 교육과정 게시판에 게시.</dd></div>
+  </dl>
+
+  <h2><span class="tag guess">추정</span> 직접 확인이 필요한 내용</h2>
+  <p class="sub">커뮤니티·부동산 정보 사이트·추론에 기반한 내용입니다. 판단 근거로 쓰기 전에 반드시 확인하세요.</p>
+  <ul class="guess-list">
+    <li><span class="src">리치고 집계</span><p>4년제 진학률 51.8%, 전문대 17.3%. <em>집계 연도 미확인 — 학교알리미 '졸업생 진로 현황'과 대조</em></p></li>
+    <li><span class="src">커뮤니티</span><p>"무난한 일반고", 최상위권 쏠림이 덜해 내신 경쟁이 상대적으로 완만하다는 인식. <em>검증되지 않은 발언 수준</em></p></li>
+    <li><span class="src">추론</span><p>고입 커트라인은 매년 바뀌며 수치로 단정할 근거가 없음. <em>중학교 진로 선생님께 전년도 지원자 성적대 문의</em></p></li>
+    <li><span class="src">확인 불가</span><p>개별 교사의 성향·수업 방식·출제 경향은 공개 자료에 없음. <em>입학 후 첫 2주 관찰 체크리스트로 파악</em></p></li>
+  </ul>
+
+  <h2>입학 전 확인 체크리스트</h2>
+  <p class="sub">항목을 확인했으면 체크하세요. 괄호 안은 그 항목을 확인해야 하는 이유입니다.</p>
+
+  <div class="progress" role="status" aria-live="polite">
+    <span>진행</span>
+    <div class="bar"><i id="bar"></i></div>
+    <span class="n" id="count">0 / 0</span>
+    <button type="button" id="reset">초기화</button>
+  </div>
+
+  <section class="group">
+    <header><h3>학교 홈페이지</h3><a href="https://www.gpoe.kr/unyang-h" target="_blank" rel="noopener">gpoe.kr/unyang-h ↗</a></header>
+    <ul>
+      <li><input type="checkbox" id="c-web-1"><label for="c-web-1">2027학년도 신입생 입학설명회 일정 확인 후 참석<span class="why">11월 예상. 전형 일정·교육과정 설명을 학교로부터 직접 들을 수 있는 유일한 자리</span></label></li>
+      <li><input type="checkbox" id="c-web-2"><label for="c-web-2">교육과정 편제표: 1학년 공통과목 구성, 2·3학년 선택과목 목록<span class="why">고1 공통과목이 곧 대입 내신. 2학년 선택은 학생 몫이므로 미리 구조를 알아야 함</span></label></li>
+      <li><input type="checkbox" id="c-web-3"><label for="c-web-3">2026년 교육과정 박람회 자료·선택과목 안내 책자<span class="why">교육과정 리더 선배들이 정리한 과목별 공부 팁이 실려 있음</span></label></li>
+      <li><input type="checkbox" id="c-web-4"><label for="c-web-4">2026학년도 1학년 평가계획서(지필·수행 비율, 수행평가 항목)<span class="why">지필보다 수행을 먼저 챙기는 전략의 출발점</span></label></li>
+      <li><input type="checkbox" id="c-web-5"><label for="c-web-5">학교 교육계획서: 자율교육과정(16+1), 공동교육과정 운영 방식<span class="why">인강·자습으로 부족한 과목을 학교 안에서 보완할 수 있는지 판단</span></label></li>
+      <li><input type="checkbox" id="c-web-6"><label for="c-web-6">입학 공지: 반 배정일, 교복, 리로스쿨 가입, 교과서 배부<span class="why">2026학년도 기준 2월 말 집중 공지. 놓치면 첫 등교부터 차질</span></label></li>
+      <li><input type="checkbox" id="c-web-7"><label for="c-web-7">동아리 목록과 모집 시기<span class="why">3월 초 모집. 학생부 세특·창체와 직결</span></label></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <header><h3>학교알리미</h3><a href="https://www.schoolinfo.go.kr" target="_blank" rel="noopener">schoolinfo.go.kr ↗</a></header>
+    <ul>
+      <li><input type="checkbox" id="c-info-1"><label for="c-info-1">2026년 학급수·학생수(학년별)<span class="why">1등급 상위 10%가 몇 명인지 계산. 330명이면 약 33명, 2등급 누적 약 112명</span></label></li>
+      <li><input type="checkbox" id="c-info-2"><label for="c-info-2">교원 현황(과목별 교사 수)<span class="why">한 과목을 몇 명이 나눠 가르치는지 = 출제 방식이 통일되는지 가늠</span></label></li>
+      <li><input type="checkbox" id="c-info-3"><label for="c-info-3">교과별 학업성취도 분포(A~E 비율)<span class="why">절대평가 A 비율이 높은 과목 = 시험이 쉬운 과목. 상대평가 변별은 다른 문제</span></label></li>
+      <li><input type="checkbox" id="c-info-4"><label for="c-info-4">졸업생 진로 현황(4년제·전문대·기타)<span class="why">위 [추정] 진학률 51.8%와 대조</span></label></li>
+      <li><input type="checkbox" id="c-info-5"><label for="c-info-5">학교 교육과정 편성·운영 현황<span class="why">홈페이지 편제표와 일치하는지 교차 확인</span></label></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <header><h3>김포교육지원청</h3><a href="https://www.gpoe.kr/gpoe" target="_blank" rel="noopener">gpoe.kr ↗</a></header>
+    <ul>
+      <li><input type="checkbox" id="c-office-1"><label for="c-office-1">2027학년도 고등학교 입학전형 기본계획(비평준화 전형 일정·원서접수일)<span class="why">김포는 비평준화. 원서접수일이 곧 고입 마감일</span></label></li>
+      <li><input type="checkbox" id="c-office-2"><label for="c-office-2">내신성적 반영지침 최종본(200점 배점)<span class="why">교과 150 + 비교과 50. 중1 2학기 반영 여부 재확인</span></label></li>
+      <li><input type="checkbox" id="c-office-3"><label for="c-office-3">관내 고교 종합현황(운양고 모집정원)<span class="why">정원 대비 지원 규모 감각</span></label></li>
+      <li><input type="checkbox" id="c-office-4"><label for="c-office-4">원서접수 절차·필요 서류<span class="why">중학교에서 일괄 진행하는지, 개별 준비 서류가 있는지</span></label></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <header><h3>중학교 담임·진로 선생님</h3><span class="tag gen">일반</span></header>
+    <ul>
+      <li><input type="checkbox" id="c-mid-1"><label for="c-mid-1">현재까지의 고입 내신 산출 점수(중1 2학기·중2·중3 1학기)<span class="why">남은 변수는 중3 2학기 약 30점. 지금 위치를 숫자로 알아야 목표가 잡힘</span></label></li>
+      <li><input type="checkbox" id="c-mid-2"><label for="c-mid-2">출결·봉사시간 현황과 마감 기한<span class="why">비교과 50점 중 40점. 무결점 방어가 목표</span></label></li>
+      <li><input type="checkbox" id="c-mid-3"><label for="c-mid-3">전년도 운양고 지원자 성적대(학교 내부 참고자료)<span class="why">커트라인을 공개 자료로는 알 수 없음. 가장 현실적인 참고치</span></label></li>
+    </ul>
+  </section>
+
+  <div class="next">
+    <h2>다음에 확인할 것</h2>
+    <ol>
+      <li>학교알리미에서 2026년 학년별 학생수를 찾아 1등급 인원을 계산하기</li>
+      <li>김포교육지원청의 2027학년도 고입 원서접수일을 캘린더에 넣기</li>
+      <li>11월 입학설명회 날짜가 공지되면 질문 목록 만들기</li>
+    </ol>
+  </div>
+
+  <div class="sources">
+    출처
+    <ul>
+      <li><a href="https://www.igimpo.com/news/articleView.html?idxno=85696" target="_blank" rel="noopener">운양고, 2025학년도 신입생 입학 설명회 개최 — 김포신문</a></li>
+      <li><a href="https://www.igimpo.com/news/articleView.html?idxno=88422" target="_blank" rel="noopener">운양고, '2025 교육과정 박람회' 개최 — 김포신문</a></li>
+      <li><a href="https://www.gpoe.kr/unyang-h/na/ntt/selectNttInfo.do?mi=10386&nttSn=1108104&bbsId=843" target="_blank" rel="noopener">2026학년도 입학식 안내 — 운양고 공지사항</a></li>
+      <li><a href="https://www.gpoe.kr/gpoe/cm/cntnts/cntntsView.do?mi=9611&cntntsId=1040" target="_blank" rel="noopener">김포교육지원청 학교현황 종합현황</a></li>
+      <li><a href="https://m.richgo.ai/realty/place/high/S090006717" target="_blank" rel="noopener">운양고 학군·진학률 — 리치고 (추정 자료)</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY='unyang-checklist-v1';
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('.group input[type=checkbox]'));
+  var bar=document.getElementById('bar'), count=document.getElementById('count');
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } }
+  function save(state){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  function render(){
+    var done=0;
+    boxes.forEach(function(b){ b.closest('li').classList.toggle('done', b.checked); if(b.checked) done++; });
+    count.textContent=done+' / '+boxes.length;
+    bar.style.width=(boxes.length? done/boxes.length*100:0)+'%';
+  }
+  var state=load();
+  boxes.forEach(function(b){
+    b.checked=!!state[b.id];
+    b.addEventListener('change', function(){ state[b.id]=b.checked; save(state); render(); });
+  });
+  document.getElementById('reset').addEventListener('click', function(){
+    state={}; save(state); boxes.forEach(function(b){ b.checked=false; }); render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
