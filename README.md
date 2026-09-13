@@ -18,12 +18,13 @@
 | [docs/area-prompts.md](docs/area-prompts.md) | 4개 핵심 영역별 시작 프롬프트 |
 | [guide.html](guide.html) | 프로젝트 설정 가이드 전체 페이지 — 지침·지식 파일 구성·샘플 아웃풋·사실 확인 현황·출처 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/guide.html) |
 | [index.html](index.html) | 운양고 입학 전 확인 노트 — [확인]/[추정] 구분 정리 + 체크리스트 웹페이지 (GitHub Pages 켜면 https://jiwonida-dotcom.github.io/highschoolstudy/ 에서 열림) |
-| [exams/science-2026-2-mid.html](exams/science-2026-2-mid.html) | 중3 2학기 중간고사 과학 예상시험(비상교육 Ⅳ·Ⅴ단원, 선택형 19+논술형 4) — 풀고 채점하면 단원별 정답률·약점 처방 자동 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/exams/science-2026-2-mid.html) |
-| [exams/과학_2학기중간_예상문제_비상.docx](exams/과학_2학기중간_예상문제_비상.docx) | 같은 시험의 인쇄용 Word (시험지·답안지·정답해설·약점 진단표) |
+| [exams/science-2026-2-mid.html](exams/science-2026-2-mid.html) | 중3 2학기 중간고사 과학 예상시험 **10회분**(비상교육 Ⅳ·Ⅴ단원, 각 선택형 19+논술형 4). 회차 선택 → 채점 → 선지별 해설·단원별 정답률·보강 가이드·7일 플랜·전체 회차 성적표 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/exams/science-2026-2-mid.html). 문항 데이터는 exams/sets_*.js |
+| [exams/과학_2학기중간_예상문제_10회분.docx](exams/과학_2학기중간_예상문제_10회분.docx) | 10회분 인쇄용 Word (회차별 시험지·답안지·정답해설 + 성적 기록표, 69쪽) |
+| [exams/과학_2학기중간_예상문제_비상.docx](exams/과학_2학기중간_예상문제_비상.docx) | 1회분 인쇄용 Word (약점 진단표 포함) |
 
 ## 시험 대비 자료 (exams/)
 
-중3 2학기 1차 정기고사(김포여중) — 과학: 비상교육 과학③ Ⅳ. 자극과 반응(130~151쪽) · Ⅴ. 생식과 유전(151~194쪽), 선택형 19문항 + 논술형 4문항. 실제 기출이 아닌 예상문제이며 배점은 임의(선택형 4점·논술형 6점)다. 다른 과목은 교과서 출판사·범위 확인 후 같은 방식으로 추가한다.
+중3 2학기 1차 정기고사(김포여중) — 과학: 비상교육 과학③ Ⅳ. 자극과 반응(130~151쪽) · Ⅴ. 생식과 유전(151~194쪽), 선택형 19문항 + 논술형 4문항 × 10회. 회차별 초점: 1 기본 진단 · 2 기본 개념 · 3 그림·자료 해석 · 4 계산·유전 · 5 용어·정의 · 6 헷갈리는 쌍 · 7 학습지형 빈칸·표 · 8 상황 적용 · 9 실전 모의 A · 10 실전 모의 B(고난도). 실제 기출이 아닌 예상문제이며 배점은 임의(선택형 4점·논술형 6점)다. 다른 과목은 교과서 출판사·범위 확인 후 같은 방식으로 추가한다.
 
 ## Claude 프로젝트 설정 순서
 
