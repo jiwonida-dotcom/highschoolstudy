@@ -13,7 +13,20 @@
 | [docs/system-facts.md](docs/system-facts.md) | 2027학년도 고입 내신 200점 체계, 2030학년도 대입(2028 개편) 제도 사실 |
 | [docs/unyang-high-school.md](docs/unyang-high-school.md) | 운양고 확인된 사실 + 입학 전 확인 체크리스트 |
 | [docs/knowledge-files.md](docs/knowledge-files.md) | 모아야 할 지식 파일 목록과 출처 |
+| [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | Claude 프로젝트 지침(Instructions)에 그대로 붙여 넣는 본문 |
+| [docs/first-conversation.md](docs/first-conversation.md) | 첫 대화 템플릿 (학생 정보 입력용) |
+| [docs/area-prompts.md](docs/area-prompts.md) | 4개 핵심 영역별 시작 프롬프트 |
+| [guide.html](guide.html) | 프로젝트 설정 가이드 전체 페이지 — 지침·지식 파일 구성·샘플 아웃풋·사실 확인 현황·출처 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/guide.html) |
 | [index.html](index.html) | 운양고 입학 전 확인 노트 — [확인]/[추정] 구분 정리 + 체크리스트 웹페이지 (GitHub Pages 켜면 https://jiwonida-dotcom.github.io/highschoolstudy/ 에서 열림) |
+
+## Claude 프로젝트 설정 순서
+
+1. Claude에서 새 프로젝트 "운양고 입시 코치"를 만든다.
+2. `PROJECT_INSTRUCTIONS.md`의 `---` 아래 본문을 프로젝트 지침에 붙여 넣는다.
+3. `docs/knowledge-files.md`의 자료를 프로젝트 지식에 올린다. 성적표·PDF는 `.gitignore`로 커밋에서 제외된다.
+4. `docs/first-conversation.md` 템플릿을 채워 첫 메시지로 보낸다. 이후 `docs/area-prompts.md`의 프롬프트로 영역별로 파고든다.
+
+샘플 아웃풋은 `guide.html`의 '샘플 아웃풋' 섹션에 있다.
 
 ## 정보 신뢰도 표기 규칙
 
