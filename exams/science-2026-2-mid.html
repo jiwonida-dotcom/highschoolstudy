@@ -56,6 +56,9 @@ h2 small{font-family:var(--sans);font-weight:400;font-size:13px;color:var(--mute
 .exp b{color:var(--accent)}
 .cause{display:none;margin:8px 0 0 36px;font-size:13px;gap:6px;flex-wrap:wrap;align-items:center}
 .graded .q.wrong .cause{display:flex}
+.rxq{display:none;margin:6px 0 0 36px;padding:8px 12px;font-size:13px;background:var(--warn-bg);color:var(--ink);border-radius:6px}
+.rxq:not(:empty){display:block}
+.graded .q.wrong .cause{display:flex}
 .cause select{font:inherit;font-size:13px;padding:3px 6px;border:1px solid var(--rule);border-radius:5px;background:var(--panel);color:var(--ink)}
 textarea{width:100%;min-height:110px;font:inherit;font-size:14px;padding:10px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);margin:8px 0 0 0;resize:vertical}
 .self{display:none;margin:8px 0 0;gap:12px;flex-wrap:wrap;font-size:13px;align-items:center}
@@ -107,7 +110,7 @@ ul.chk input:checked + span{color:var(--muted);text-decoration:line-through}
 .gbody a{color:var(--accent)}
 pre.copy{white-space:pre-wrap;background:var(--panel);border:1px dashed var(--rule);padding:12px 14px;border-radius:8px;font-family:var(--sans);font-size:13px;margin-top:10px}
 footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
-@media (max-width:480px){.box,.choices,.exp,.cause{margin-left:0}.q .stem .n{min-width:22px}h1{font-size:22px}}
+@media (max-width:480px){.box,.choices,.exp,.cause,.rxq{margin-left:0}.q .stem .n{min-width:22px}h1{font-size:22px}}
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .5s ease}}
 </style>
 </head>
@@ -242,7 +245,7 @@ MC.forEach((q,i)=>{
    (q.box?`<div class="box"><p><b>[보기]</b></p>${q.box.map(b=>`<p>${b}</p>`).join('')}</div>`:'')+
    `<ul class="choices">${q.c.map((c,j)=>`<li><label class="${j+1===q.a?'ans':''}"><input type="radio" name="q${n}" id="q${n}c${j+1}" value="${j+1}"><span class="c">${CIRC[j]}</span><span>${c}</span></label></li>`).join('')}</ul>`+
    `<div class="exp"><b>정답 ${CIRC[q.a-1]}</b> · ${q.e}<details class="more"><summary>자세한 해설 (선지별 분석 + 핵심 정리)</summary><ul>${DETAIL[n].sel.map(s=>`<li>${s}</li>`).join('')}</ul><p class="core"><b>핵심 정리</b> ${DETAIL[n].core}</p></details></div>`+
-   `<div class="cause"><span>틀린 원인:</span><select id="cause${n}"><option value="">선택</option>${Object.entries(CAUSES).map(([k,v])=>`<option value="${k}">${k}. ${v}</option>`).join('')}</select></div>`;
+   `<div class="cause"><span>틀린 원인:</span><select id="cause${n}"><option value="">선택</option>${Object.entries(CAUSES).map(([k,v])=>`<option value="${k}">${k}. ${v}</option>`).join('')}</select></div><div class="rxq" id="rxq${n}"></div>`;
   mcEl.appendChild(d);
 });
 ES.forEach((q,i)=>{
@@ -274,9 +277,7 @@ function grade(){
   Object.entries(unit).forEach(([k,u])=>{const r=Math.round(u.ok/u.n*100);const j=r>=80?['ok','안정']:r>=60?['warn','보강']:['bad','집중'];
     tb.insertAdjacentHTML('beforeend',`<tr><td>${UNITS[k]}</td><td class="num">${u.n}</td><td class="num">${u.ok}</td><td><div class="bar"><i style="width:${r}%"></i></div><span class="hint">${r}%</span></td><td><span class="judge ${j[0]}">${j[1]}</span></td></tr>`);
     lines.push(`${UNITS[k]}: ${u.ok}/${u.n} (${r}%) ${j[1]}${u.items.length?' · 틀린 문항 '+u.items.join(', '):''}`);});
-  const causes={};MC.forEach((q,i)=>{const n=i+1;if(getMC(n)!==q.a){const c=$('#cause'+n).value||'?';causes[c]=(causes[c]||[]);causes[c].push(n);}});
-  const rx=$('#rx');rx.innerHTML='';Object.entries(causes).forEach(([c,ns])=>{if(RX[c])rx.insertAdjacentHTML('beforeend',`<div><b>${c}. ${CAUSES[c]}</b> — ${ns.join(', ')}번<br>${RX[c]}</div>`);});
-  if(wrong.length&&!Object.keys(causes).some(c=>RX[c]))rx.innerHTML='<div class="hint">틀린 문항마다 "틀린 원인"을 고르면 원인별 처방이 여기에 나옵니다.</div>';
+  renderCauses(wrong);
   // 보강 학습 가이드: 정답률 낮은 단원부터
   const order=Object.entries(unit).map(([k,u])=>({k,r:u.ok/u.n,items:u.items})).sort((a,b)=>a.r-b.r);
   const g=$('#guide');g.innerHTML='';
@@ -290,7 +291,6 @@ function grade(){
       </div></details>`);});
   // 7일 플랜
   const weak=order.filter(o=>o.r<0.8).map(o=>o.k), strong=order.filter(o=>o.r>=0.8).map(o=>o.k);
-  const nm=k=>UNITS[k].replace(/^Ⅳ-0\d |^Ⅴ-0\d /,'');
   const days=[];
   const w=weak.length?weak:['g2'];
   days.push(['D-7',`가장 약한 단원 <b>${nm(w[0])}</b>: 인강 재수강(1.5배속) + 교과서 본문 정독 + 체크리스트 채우기`,'체크리스트 전부 체크']);
@@ -301,17 +301,37 @@ function grade(){
   days.push(['D-2',`이 시험 <b>전체 재풀이</b>(45분 알람) → 채점 → 아직 틀리는 문항만 오답 노트${strong.length?` · 안정 단원(${strong.map(nm).join(', ')})은 헷갈리는 쌍만 확인`:''}`,'총점 90 이상']);
   days.push(['D-1','오답 노트 + 헷갈리는 쌍 목록 + 호르몬 표·분열 비교표 최종 확인. 새 문제 풀지 않기','30분 안에 끝내고 일찍 자기']);
   $('#plan tbody').innerHTML=days.map(d=>`<tr><td><b>${d[0]}</b></td><td>${d[1]}</td><td class="hint">${d[2]}</td></tr>`).join('');
+  document.body.classList.add('graded');save();
+  G_STATE={total,mcScore,esScore,lines,wrong,weak};
+  renderSummary();
   loadChk();
+}
+let G_STATE=null;
+const nm=k=>UNITS[k].replace(/^Ⅳ-0\d |^Ⅴ-0\d /,'');
+function renderCauses(wrong){
+  const causes={};MC.forEach((q,i)=>{const n=i+1;if(getMC(n)!==q.a){const c=$('#cause'+n).value||'?';causes[c]=(causes[c]||[]);causes[c].push(n);}});
+  const rx=$('#rx');rx.innerHTML='';Object.entries(causes).forEach(([c,ns])=>{if(RX[c])rx.insertAdjacentHTML('beforeend',`<div><b>${c}. ${CAUSES[c]}</b> — ${ns.join(', ')}번<br>${RX[c]}</div>`);});
+  const left=(causes['?']||[]).length;
+  if(wrong.length&&left)rx.insertAdjacentHTML('afterbegin',`<div class="hint">아직 원인을 고르지 않은 문항 ${left}개: ${(causes['?']||[]).map(n=>`<a href="#q${n}">${n}번</a>`).join(', ')}. 각 문항 아래 "틀린 원인"을 고르면 처방이 여기에 모입니다.</div>`);
+  // 문항 아래 즉시 처방 표시
+  MC.forEach((q,i)=>{const n=i+1;const box=$('#rxq'+n);if(!box)return;const c=$('#cause'+n).value;box.innerHTML=c?`<b>${c}. ${CAUSES[c]}</b> → ${RX[c]}`:'';});
+}
+function renderSummary(){
+  if(!G_STATE)return;const {total,mcScore,esScore,lines,wrong,weak}=G_STATE;
   const wl=wrong.map(n=>`${n}번(${MC[n-1].k}) 내답 ${getMC(n)?CIRC[getMC(n)-1]:'무응답'}/정답 ${CIRC[MC[n-1].a-1]}${$('#cause'+n).value?' 원인 '+$('#cause'+n).value:''}`);
   $('#summary').textContent=`[과학 2학기 중간 예상시험 결과]\n총점 ${total}/100 (선택형 ${mcScore}/76, 논술형 자가채점 ${esScore}/24)\n`+lines.join('\n')+`\n틀린 선택형: ${wl.length?wl.join('; '):'없음'}\n논술형 자가채점: ${ES.map((_,i)=>'논'+(i+1)+' '+(getES(i+1)??'-')).join(', ')}\n보강 우선 단원: ${weak.length?weak.map(nm).join(' > '):'없음(전 단원 80% 이상)'}`;
-  document.body.classList.add('graded');save();
 }
 $('#grade').addEventListener('click',()=>{grade();$('#report').scrollIntoView({behavior:'smooth'});});
 $('#reset').addEventListener('click',()=>{document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);document.querySelectorAll('textarea').forEach(t=>t.value='');document.querySelectorAll('select').forEach(s=>s.value='');document.body.classList.remove('graded');document.querySelectorAll('.q').forEach(q=>q.classList.remove('right','wrong'));document.querySelectorAll('.tag').forEach(t=>{t.className='tag';t.textContent='';});$('#scoreTop').textContent='–';count();save();window.scrollTo({top:0,behavior:'smooth'});});
 $('#copyBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#summary').textContent);$('#copied').textContent='복사됨';}catch(e){$('#copied').textContent='직접 드래그해서 복사하세요';}});
 function saveChk(){try{localStorage.setItem('sci-mid-2026-chk',JSON.stringify([...document.querySelectorAll('#guide input:checked')].map(i=>i.id)));}catch(e){}}
 function loadChk(){try{(JSON.parse(localStorage.getItem('sci-mid-2026-chk')||'[]')).forEach(id=>{const el=document.getElementById(id);if(el)el.checked=true;});}catch(e){}}
-document.addEventListener('change',e=>{if(e.target.closest('#guide')){saveChk();return;}count();if(document.body.classList.contains('graded'))grade();else save();});
+document.addEventListener('change',e=>{
+  if(e.target.closest('#guide')){saveChk();return;}
+  if(e.target.matches('select[id^=cause]')){if(G_STATE){renderCauses(G_STATE.wrong);renderSummary();}save();return;}
+  count();
+  if(document.body.classList.contains('graded'))grade();else save();
+});
 document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')save();});
 load();count();
 </script>
