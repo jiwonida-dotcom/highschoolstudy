@@ -18,13 +18,18 @@
 | [docs/area-prompts.md](docs/area-prompts.md) | 4개 핵심 영역별 시작 프롬프트 |
 | [guide.html](guide.html) | 프로젝트 설정 가이드 전체 페이지 — 지침·지식 파일 구성·샘플 아웃풋·사실 확인 현황·출처 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/guide.html) |
 | [index.html](index.html) | 운양고 입학 전 확인 노트 — [확인]/[추정] 구분 정리 + 체크리스트 웹페이지 (GitHub Pages 켜면 https://jiwonida-dotcom.github.io/highschoolstudy/ 에서 열림) |
+| [exams/index.html](exams/index.html) | **시험지 선택 시작 페이지** — 과목(과학·국어) 카드, D-day, 과목별 진행 현황, 준비 중 과목 안내 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/exams/) |
 | [exams/science-2026-2-mid.html](exams/science-2026-2-mid.html) | 중3 2학기 중간고사 과학 예상시험 **10회분**(비상교육 Ⅳ·Ⅴ단원, 각 선택형 19+논술형 4). 회차 선택 → 채점 → 선지별 해설·단원별 정답률·보강 가이드·7일 플랜·전체 회차 성적표 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/exams/science-2026-2-mid.html). 문항 데이터는 exams/sets_*.js |
 | [exams/과학_2학기중간_예상문제_10회분.docx](exams/과학_2학기중간_예상문제_10회분.docx) | 10회분 인쇄용 Word (회차별 시험지·답안지·정답해설 + 성적 기록표, 69쪽) |
 | [exams/과학_2학기중간_예상문제_비상.docx](exams/과학_2학기중간_예상문제_비상.docx) | 1회분 인쇄용 Word (약점 진단표 포함) |
+| [exams/korean-2026-2-mid.html](exams/korean-2026-2-mid.html) | 중3 2학기 중간고사 국어 예상시험 **10회분**(천재교육 국어③-2 1단원 문학의 샘: 청포도·가난한 사랑 노래·기억 속의 들꽃, 각 선택형 19+논술형 4). 과학과 같은 기능 (GitHub Pages: https://jiwonida-dotcom.github.io/highschoolstudy/exams/korean-2026-2-mid.html). 문항 데이터 exams/ksets_*.js |
+| [exams/국어_2학기중간_예상문제_10회분.docx](exams/국어_2학기중간_예상문제_10회분.docx) | 국어 10회분 인쇄용 Word (63쪽) |
 
 ## 시험 대비 자료 (exams/)
 
 중3 2학기 1차 정기고사(김포여중) — 과학: 비상교육 과학③ Ⅳ. 자극과 반응(130~151쪽) · Ⅴ. 생식과 유전(151~194쪽), 선택형 19문항 + 논술형 4문항 × 10회. 회차별 초점: 1 기본 진단 · 2 기본 개념 · 3 그림·자료 해석 · 4 계산·유전 · 5 용어·정의 · 6 헷갈리는 쌍 · 7 학습지형 빈칸·표 · 8 상황 적용 · 9 실전 모의 A · 10 실전 모의 B(고난도). 실제 기출이 아닌 예상문제이며 배점은 임의(선택형 4점·논술형 6점)다. 다른 과목은 교과서 출판사·범위 확인 후 같은 방식으로 추가한다.
+
+국어 — 천재교육 국어③-2 1. 문학의 샘: (1) 문학의 다양한 해석 「청포도」(이육사), (2) 문학, 시대의 거울 「가난한 사랑 노래」(신경림)·「기억 속의 들꽃」(윤흥길). 회차별 초점: 1 기본 진단 · 2 개념·용어 · 3 청포도 집중 · 4 가난한 사랑 노래 집중 · 5 기억 속의 들꽃 집중 · 6 헷갈리는 개념 쌍 · 7 학습지형 빈칸·표 · 8 적용·통합 활동 · 9 실전 모의 A · 10 실전 모의 B(고난도). 저작권 보호 작품(신경림·윤흥길)의 본문은 싣지 않았다.
 
 ## Claude 프로젝트 설정 순서
 

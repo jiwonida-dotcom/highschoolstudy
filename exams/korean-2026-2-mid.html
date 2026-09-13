@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>과학 2학기 중간 예상시험</title>
+<title>국어 2학기 중간 예상시험</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
 :root{
@@ -138,15 +138,15 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
 
 <header class="top"><div class="wrap">
   <div>
-    <div class="eyebrow">비상교육 과학③ · 2학기 1차 정기고사 대비</div>
-    <h1>과학 2학기 중간 예상시험</h1>
-    <div class="meta">Ⅳ. 자극과 반응(130~151쪽) · Ⅴ. 생식과 유전(151~194쪽) · 10회분 · 각 선택형 19 + 논술형 4 · 45분</div>
+    <div class="eyebrow">천재교육 국어③-2 · 2학기 1차 정기고사 대비</div>
+    <h1>국어 2학기 중간 예상시험</h1>
+    <div class="meta">1. 문학의 샘 — 청포도(이육사) · 가난한 사랑 노래(신경림) · 기억 속의 들꽃(윤흥길) · 10회분 · 각 선택형 19 + 논술형 4 · 45분</div>
   </div>
   <div class="stat"><div><b id="done">0</b><span>/19 답함</span></div><div><b id="scoreTop">–</b><span>점</span></div></div>
 </div></header>
 
 <div class="wrap">
-<p class="notice">10회분 시험지입니다. <b>1회부터 순서대로</b> 푸는 것을 권하되, 채점 결과에서 약한 단원이 나오면 그 단원을 두껍게 다루는 회차(6회 헷갈리는 쌍, 4회 계산 등)를 골라 푸세요. 교과서·학습지를 덮고 45분 알람을 맞춘 뒤 풀고, <b>채점하기</b>를 누르면 해설·단원별 정답률·보강 가이드가 나옵니다. 실제 기출이 아니라 범위와 문항 구성에 맞춘 예상문제입니다.</p>
+<p class="notice">10회분 시험지입니다. <b>1회부터 순서대로</b> 푸는 것을 권하되, 채점 결과에서 약한 영역이 나오면 그 작품을 집중적으로 다루는 회차(3회 청포도, 4회 가난한 사랑 노래, 5회 기억 속의 들꽃, 6회 개념 쌍)를 골라 푸세요. 교과서·학습지를 덮고 45분 알람을 맞춘 뒤 풀고, <b>채점하기</b>를 누르면 해설·영역별 정답률·보강 가이드가 나옵니다. 실제 기출이 아니라 범위와 문항 구성에 맞춘 예상문제입니다. 「가난한 사랑 노래」와 「기억 속의 들꽃」은 저작권 보호 작품이라 본문을 싣지 않았으니 <b>교과서를 옆에 두고 먼저 읽은 뒤</b> 푸세요.</p>
 
 <h2 style="font-size:17px;margin-top:8px">시험지 선택 <small>회차별 점수는 이 브라우저에 저장됩니다</small></h2>
 <div class="picker" id="picker"></div>
@@ -171,11 +171,11 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
     <div><div class="big"><span id="total">0</span><small> / 100</small></div><div class="sub">선택형 <span id="mcScore">0</span>/76 + 논술형 <span id="esScore">0</span>/24</div></div>
     <div><div class="sub" id="verdict"></div></div>
   </div>
-  <div class="tablewrap"><table id="unitTbl"><thead><tr><th>단원</th><th>문항</th><th class="num">정답</th><th>정답률</th><th>판정</th></tr></thead><tbody></tbody></table></div>
+  <div class="tablewrap"><table id="unitTbl"><thead><tr><th>영역</th><th>문항</th><th class="num">정답</th><th>정답률</th><th>판정</th></tr></thead><tbody></tbody></table></div>
   <div class="rx" id="rx"></div>
 
-  <h2 style="font-size:17px;margin-top:32px">보강 학습 가이드 <small>정답률이 낮은 단원부터</small></h2>
-  <p class="hint" style="margin:0 0 10px">단원마다 시험에 나오는 핵심 개념을 체크리스트로 두었습니다. 설명 없이 말할 수 있는 항목만 체크하세요. 체크가 안 되는 항목이 곧 공부할 목록입니다.</p>
+  <h2 style="font-size:17px;margin-top:32px">보강 학습 가이드 <small>정답률이 낮은 영역부터</small></h2>
+  <p class="hint" style="margin:0 0 10px">영역마다 시험에 나오는 핵심 개념을 체크리스트로 두었습니다. 설명 없이 말할 수 있는 항목만 체크하세요. 체크가 안 되는 항목이 곧 공부할 목록입니다.</p>
   <div id="guide"></div>
 
   <h2 style="font-size:17px;margin-top:32px">시험 전 7일 보강 플랜 <small>결과에 맞춰 자동 배정</small></h2>
@@ -188,30 +188,29 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
 
 <section id="overall">
   <h2>Ⅳ. 전체 회차 성적표 <small>푼 회차가 쌓일수록 정확해집니다</small></h2>
-  <div class="tablewrap"><table id="allTbl"><thead><tr><th>회차</th><th>초점</th><th class="num">선택형</th><th class="num">논술형</th><th class="num">총점</th><th>가장 약한 단원</th></tr></thead><tbody></tbody></table></div>
-  <p class="hint" style="margin:14px 0 0">단원 × 회차 정답률 (초록 80% 이상 · 노랑 60~79% · 빨강 60% 미만)</p>
+  <div class="tablewrap"><table id="allTbl"><thead><tr><th>회차</th><th>초점</th><th class="num">선택형</th><th class="num">논술형</th><th class="num">총점</th><th>가장 약한 영역</th></tr></thead><tbody></tbody></table></div>
+  <p class="hint" style="margin:14px 0 0">영역 × 회차 정답률 (초록 80% 이상 · 노랑 60~79% · 빨강 60% 미만)</p>
   <div class="hm" id="hm"></div>
   <div class="rx" id="allRx" style="margin-top:14px"></div>
   <div class="actions" style="margin-top:8px"><button id="copyAll">전체 성적표 복사</button><span class="hint" id="copiedAll"></span></div>
 </section>
 
-<footer>배점은 임의(선택형 4점·논술형 6점)이며 실제 배점은 학교 평가계획서로 확인하세요. 시험 범위 안내의 "학습지 및 필기 내용 포함"에 따라 수업 학습지의 그림·표는 따로 복습해야 합니다.</footer>
+<footer>배점은 임의(선택형 4점·논술형 6점)이며 실제 배점은 학교 평가계획서로 확인하세요. 실제 시험은 교과서 본문 지문이 제시되므로, 수업 시간에 선생님이 표시한 시어·구절과 학습지 정리표를 반드시 함께 복습해야 합니다.</footer>
 </div>
 
-<script src="sets_1.js"></script>
-<script src="sets_a.js"></script>
-<script src="sets_b.js"></script>
-<script src="sets_c.js"></script>
+<script src="ksets_a.js"></script>
+<script src="ksets_b.js"></script>
+<script src="ksets_c.js"></script>
 <script>
-const UNITS = { s1:'Ⅳ-01 감각기관', s2:'Ⅳ-02 신경계', s3:'Ⅳ-02 호르몬', g1:'Ⅴ-01 생식', g2:'Ⅴ-02 유전' };
-const SETS = [window.SET1, ...window.SETS_A, ...window.SETS_B, ...window.SETS_C];
-const GUIDE = window.GUIDE;
+const UNITS = { k1:'(1) 해석의 관점', k2:'(1) 청포도', k3:'(2) 가난한 사랑 노래', k4:'(2) 기억 속의 들꽃', k5:'(2) 시대 반영·용어' };
+const SETS = [...window.KSETS_A, ...window.KSETS_B, ...window.KSETS_C];
+const GUIDE = window.KGUIDE;
 const CIRC=['①','②','③','④','⑤'];
 const CAUSES={A:'개념을 몰랐다',B:'알았는데 헷갈렸다',C:'알았는데 실수했다',D:'시간이 부족했다'};
-const RX={A:'해당 소단원 교과서 본문을 다시 읽고 인강 해당 강의를 1.5배속으로 재수강 → 백지에 핵심 용어·그림을 그려 복기 → 다음 날 재풀이',B:'헷갈리는 쌍을 비교표로 한 장에 정리(교감/부교감, 체세포/감수 분열, 인슐린/글루카곤, 홍채/섬모체) → 6회 "헷갈리는 쌍 집중" 세트를 푼다',C:'"옳지 않은 것", "있는 대로 고른 것"에 밑줄 치기. 문제를 끝까지 읽기 전에 답 고르지 않기. 비율(9:3:3:1)을 먼저 쓰고 계산',D:'선택형 1문항 1.5분 기준으로 연습. 논술형은 채점 기준의 키워드(척수, 글리코젠, 2가 염색체 등)부터 쓰고 문장을 붙인다. 9·10회 실전 모의를 시간 재고 푼다'};
-const nm=k=>UNITS[k].replace(/^Ⅳ-0\d |^Ⅴ-0\d /,'');
+const RX={A:'해당 소영역 교과서 본문을 다시 읽고 인강 해당 강의를 1.5배속으로 재수강 → 백지에 핵심 용어·그림을 그려 복기 → 다음 날 재풀이',B:'헷갈리는 쌍을 비교표로 한 장에 정리(표현론/반영론, 화자/시인, 1인칭 주인공/관찰자, 반어/역설, 상징/비유) → 6회 "헷갈리는 개념 쌍" 세트를 푼다',C:'"옳지 않은 것", "거리가 먼 것"에 밑줄 치기. 선지의 작품 이름·인물 이름이 바뀐 함정(청포/청포도, 화자/서술자)을 확인',D:'선택형 1문항 1.5분 기준으로 연습. 논술형은 채점 기준의 키워드(관점 이름, 근거의 위치, 시점, 상징 의미)부터 쓰고 문장을 붙인다. 9·10회 실전 모의를 시간 재고 푼다'};
+const nm=k=>UNITS[k].replace(/^\(\d\) /,'');
 const $=s=>document.querySelector(s);
-const KEY=id=>'sci-mid-2026-set'+id;
+const KEY=id=>'kor-mid-2026-set'+id;
 
 let CUR=null, MC=[], ES=[], G_STATE=null;
 
@@ -222,8 +221,8 @@ function snapshot(){return {mc:MC.map((_,i)=>getMC(i+1)),es:ES.map((_,i)=>$('#es
 function save(){try{localStorage.setItem(KEY(CUR.id),JSON.stringify(snapshot()));}catch(e){}}
 function loadStored(id){try{return JSON.parse(localStorage.getItem(KEY(id))||'null');}catch(e){return null;}}
 function restore(){const st=loadStored(CUR.id);if(!st)return;st.mc.forEach((v,i)=>{if(v){const el=$(`#q${i+1}c${v}`);if(el)el.checked=true;}});st.es.forEach((v,i)=>{const t=$('#es'+(i+1));if(t)t.value=v||'';});(st.ess||[]).forEach((v,i)=>{if(v!==null&&v!==undefined){const el=$(`#es${i+1}s${v}`);if(el)el.checked=true;}});(st.cause||[]).forEach((v,i)=>{const c=$('#cause'+(i+1));if(c)c.value=v||'';});if(st.graded)grade(false);}
-function saveChk(){try{localStorage.setItem('sci-mid-2026-chk',JSON.stringify([...document.querySelectorAll('#guide input:checked')].map(i=>i.id)));}catch(e){}}
-function loadChk(){try{(JSON.parse(localStorage.getItem('sci-mid-2026-chk')||'[]')).forEach(id=>{const el=document.getElementById(id);if(el)el.checked=true;});}catch(e){}}
+function saveChk(){try{localStorage.setItem('kor-mid-2026-chk',JSON.stringify([...document.querySelectorAll('#guide input:checked')].map(i=>i.id)));}catch(e){}}
+function loadChk(){try{(JSON.parse(localStorage.getItem('kor-mid-2026-chk')||'[]')).forEach(id=>{const el=document.getElementById(id);if(el)el.checked=true;});}catch(e){}}
 function count(){const c=MC.filter((_,i)=>getMC(i+1)).length;$('#done').textContent=c;}
 
 /* ---------- 세트 선택 ---------- */
@@ -239,7 +238,7 @@ function loadSet(id,scroll){
   document.body.classList.remove('graded');$('#scoreTop').textContent='–';
   $('#setTitle').textContent=CUR.title;$('#setFocus').textContent=CUR.focus;$('#reportSet').textContent='· '+CUR.title;
   renderQuestions();restore();count();renderPicker();
-  try{localStorage.setItem('sci-mid-2026-cur',String(id));}catch(e){}
+  try{localStorage.setItem('kor-mid-2026-cur',String(id));}catch(e){}
   if(scroll)$('#setTitle').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
@@ -272,7 +271,7 @@ function grade(doSave=true){
   let esScore=0;ES.forEach((q,i)=>{const s=getES(i+1);if(s!==null)esScore+=s;unit[q.u].n++;if(s!==null&&s>=4)unit[q.u].ok++;else unit[q.u].items.push('논'+(i+1));});
   const total=mcScore+esScore;
   $('#total').textContent=total;$('#scoreTop').textContent=total;$('#mcScore').textContent=mcScore;$('#esScore').textContent=esScore;
-  $('#verdict').textContent=total>=90?'안정권. 다음 회차로 넘어가거나 10회 고난도로 확인하세요.':total>=75?'상위권 진입 가능. 틀린 단원을 아래 처방대로 보강한 뒤 다음 회차를 푸세요.':total>=60?'보강 필요. 60% 미만 단원부터 교과서 본문으로 돌아간 뒤 같은 단원 비중이 큰 회차를 푸세요.':'집중 보강 필요. 인강 해당 단원을 다시 듣고 이 회차를 3일 뒤 재풀이하세요.';
+  $('#verdict').textContent=total>=90?'안정권. 다음 회차로 넘어가거나 10회 고난도로 확인하세요.':total>=75?'상위권 진입 가능. 틀린 영역을 아래 처방대로 보강한 뒤 다음 회차를 푸세요.':total>=60?'보강 필요. 60% 미만 영역의 작품을 교과서로 다시 읽은 뒤 그 작품 집중 회차를 푸세요.':'집중 보강 필요. 교과서 본문과 학습지를 다시 정리하고 이 회차를 3일 뒤 재풀이하세요.';
   const tb=$('#unitTbl tbody');tb.innerHTML='';const lines=[];const unitPct={};
   Object.entries(unit).forEach(([k,u])=>{const r=Math.round(u.ok/u.n*100);unitPct[k]=r;const j=judge(r);
     tb.insertAdjacentHTML('beforeend',`<tr><td>${UNITS[k]}</td><td class="num">${u.n}</td><td class="num">${u.ok}</td><td><div class="bar"><i style="width:${r}%"></i></div><span class="hint">${r}%</span></td><td><span class="judge ${j[0]}">${j[1]}</span></td></tr>`);
@@ -285,25 +284,25 @@ function grade(doSave=true){
       <p><b>핵심 개념 체크리스트</b></p><ul class="chk">${G.concepts.map((c,i)=>`<li><label><input type="checkbox" id="g_${o.k}_${i}"><span>${c}</span></label></li>`).join('')}</ul>
       <p><b>헷갈리기 쉬운 쌍</b> — ${G.confuse.join(' / ')}</p>
       <p><b>공부 방법</b> — ${G.how}</p>
-      <p><b>이 단원을 더 연습할 회차</b> — ${recommendSets(o.k)}</p>
+      <p><b>이 영역을 더 연습할 회차</b> — ${recommendSets(o.k)}</p>
       ${o.items.length?`<p><b>틀린 문항 다시 보기</b> — ${o.items.map(n=>`<a href="#${String(n).startsWith('논')?'e'+String(n).slice(1):'q'+n}">${n}번</a>`).join(', ')}의 해설을 읽고 핵심 정리를 노트에 옮겨 적는다.</p>`:''}
       </div></details>`);});
   const weak=order.filter(o=>o.r<0.8).map(o=>o.k), strong=order.filter(o=>o.r>=0.8).map(o=>o.k);
-  const w=weak.length?weak:['g2'];const days=[];
-  days.push(['D-7',`가장 약한 단원 <b>${nm(w[0])}</b>: 인강 재수강(1.5배속) + 교과서 본문 정독 + 체크리스트 채우기`,'체크리스트 전부 체크']);
-  days.push(['D-6',`<b>${nm(w[0])}</b> 백지 복기 + 틀린 문항 재풀이${w[1]?`, <b>${nm(w[1])}</b> 인강 재수강`:''}`,'재풀이 정답, 백지에 표·그림 재현']);
-  days.push(['D-5',w[1]?`<b>${nm(w[1])}</b> 백지 복기 + 틀린 문항 재풀이${w[2]?`, <b>${nm(w[2])}</b> 교과서 정독`:''}`:'약한 단원 학습지 문제 전부 재풀이','학습지 문제 정답률 90%']);
-  days.push(['D-4',`${w[2]?`<b>${nm(w[2])}</b> 백지 복기 + `:''}학습지·필기 내용 전 범위 1회독 (선생님 "중요" 표시 우선) + 아직 안 푼 회차 1개`,'학습지 그림·표에 빈칸 만들어 채우기']);
-  days.push(['D-3',`논술형 답안을 손으로 다시 쓰기 (5회 용어·정의 세트의 논술형 4문항 포함)`,'모범 답안과 대조해 키워드 누락 0']);
-  days.push(['D-2',`<b>9회 실전 모의 A</b> 또는 <b>10회 고난도</b>를 45분 알람으로 → 채점 → 아직 틀리는 문항만 오답 노트${strong.length?` · 안정 단원(${strong.map(nm).join(', ')})은 헷갈리는 쌍만 확인`:''}`,'총점 90 이상']);
-  days.push(['D-1','오답 노트 + 헷갈리는 쌍 목록 + 호르몬 표·분열 비교표 최종 확인. 새 문제 풀지 않기','30분 안에 끝내고 일찍 자기']);
+  const w=weak.length?weak:['k4'];const days=[];
+  days.push(['D-7',`가장 약한 영역 <b>${nm(w[0])}</b>: 교과서 본문 다시 읽기(시는 소리 내어 3번) + 인강 해당 강의 재수강 + 체크리스트 채우기`,'체크리스트 전부 체크']);
+  days.push(['D-6',`<b>${nm(w[0])}</b> 정리표 백지 복기 + 틀린 문항 재풀이${w[1]?`, <b>${nm(w[1])}</b> 교과서 재독`:''}`,'재풀이 정답, 백지에 정리표 재현']);
+  days.push(['D-5',w[1]?`<b>${nm(w[1])}</b> 정리표 백지 복기 + 틀린 문항 재풀이${w[2]?`, <b>${nm(w[2])}</b> 교과서 재독`:''}`:'약한 영역 학습지 문제 전부 재풀이','학습지 문제 정답률 90%']);
+  days.push(['D-4',`${w[2]?`<b>${nm(w[2])}</b> 정리표 백지 복기 + `:''}학습지·필기 내용 전 범위 1회독 (선생님이 표시한 시어·구절 우선) + 아직 안 푼 회차 1개`,'학습지 정리표에 빈칸 만들어 채우기']);
+  days.push(['D-3',`논술형 답안을 손으로 다시 쓰기 (2회 개념·용어 세트와 7회 정리표 세트의 논술형 포함)`,'모범 답안과 대조해 키워드 누락 0']);
+  days.push(['D-2',`<b>9회 실전 모의 A</b> 또는 <b>10회 고난도</b>를 45분 알람으로 → 채점 → 아직 틀리는 문항만 오답 노트${strong.length?` · 안정 영역(${strong.map(nm).join(', ')})은 헷갈리는 쌍만 확인`:''}`,'총점 90 이상']);
+  days.push(['D-1','오답 노트 + 헷갈리는 쌍 목록 + 세 작품 비교표·해석 관점 표 최종 확인. 새 문제 풀지 않기','30분 안에 끝내고 일찍 자기']);
   $('#plan tbody').innerHTML=days.map(d=>`<tr><td><b>${d[0]}</b></td><td>${d[1]}</td><td class="hint">${d[2]}</td></tr>`).join('');
   document.body.classList.add('graded');
   G_STATE={total,mcScore,esScore,lines,wrong,weak,unitPct};
   renderCauses(wrong);renderSummary();loadChk();
   if(doSave)save();renderPicker();renderOverall();
 }
-function recommendSets(k){const map={s1:'2회·3회·8회',s2:'2회·4회·8회·10회',s3:'3회·4회·7회',g1:'3회·5회·6회·10회',g2:'4회·7회·8회·10회'};return map[k]||'';}
+function recommendSets(k){const map={k1:'2회·6회·7회·8회',k2:'3회·7회·10회',k3:'4회·6회·8회·10회',k4:'5회·6회·7회·10회',k5:'2회·7회·8회·9회'};return map[k]||'';}
 function renderCauses(wrong){
   const causes={};MC.forEach((q,i)=>{const n=i+1;if(getMC(n)!==q.a){const c=$('#cause'+n).value||'?';causes[c]=(causes[c]||[]);causes[c].push(n);}});
   const rx=$('#rx');rx.innerHTML='';Object.entries(causes).forEach(([c,ns])=>{if(RX[c])rx.insertAdjacentHTML('beforeend',`<div><b>${c}. ${CAUSES[c]}</b> — ${ns.join(', ')}번<br>${RX[c]}</div>`);});
@@ -314,12 +313,12 @@ function renderCauses(wrong){
 function renderSummary(){
   if(!G_STATE)return;const {total,mcScore,esScore,lines,wrong,weak}=G_STATE;
   const wl=wrong.map(n=>`${n}번(${MC[n-1].k}) 내답 ${getMC(n)?CIRC[getMC(n)-1]:'무응답'}/정답 ${CIRC[MC[n-1].a-1]}${$('#cause'+n).value?' 원인 '+$('#cause'+n).value:''}`);
-  $('#summary').textContent=`[과학 2학기 중간 예상시험 ${CUR.title} 결과]\n총점 ${total}/100 (선택형 ${mcScore}/76, 논술형 자가채점 ${esScore}/24)\n`+lines.join('\n')+`\n틀린 선택형: ${wl.length?wl.join('; '):'없음'}\n논술형 자가채점: ${ES.map((_,i)=>'논'+(i+1)+' '+(getES(i+1)??'-')).join(', ')}\n보강 우선 단원: ${weak.length?weak.map(nm).join(' > '):'없음(전 단원 80% 이상)'}`;
+  $('#summary').textContent=`[국어 2학기 중간 예상시험 ${CUR.title} 결과]\n총점 ${total}/100 (선택형 ${mcScore}/76, 논술형 자가채점 ${esScore}/24)\n`+lines.join('\n')+`\n틀린 선택형: ${wl.length?wl.join('; '):'없음'}\n논술형 자가채점: ${ES.map((_,i)=>'논'+(i+1)+' '+(getES(i+1)??'-')).join(', ')}\n보강 우선 영역: ${weak.length?weak.map(nm).join(' > '):'없음(전 영역 80% 이상)'}`;
 }
 
 /* ---------- 전체 성적표 ---------- */
 function renderOverall(){
-  const tb=$('#allTbl tbody');tb.innerHTML='';const hm=$('#hm');hm.innerHTML='<div class="h"></div>'+Object.values(UNITS).map(u=>`<div class="h">${u.replace(/^.+ /,'')}</div>`).join('');
+  const tb=$('#allTbl tbody');tb.innerHTML='';const hm=$('#hm');hm.innerHTML='<div class="h"></div>'+Object.keys(UNITS).map(k=>`<div class="h">${nm(k)}</div>`).join('');
   const acc={};Object.keys(UNITS).forEach(k=>acc[k]=[]);let done=0;const rows=[];
   SETS.forEach(st=>{const d=loadStored(st.id);const r=d&&d.result;
     if(r){done++;const weakest=Object.entries(r.unit).sort((a,b)=>a[1]-b[1])[0];
@@ -331,8 +330,8 @@ function renderOverall(){
   const avg=Object.entries(acc).map(([k,a])=>({k,v:Math.round(a.reduce((x,y)=>x+y,0)/a.length)})).sort((a,b)=>a.v-b.v);
   const tot=SETS.map(s=>loadStored(s.id)).filter(d=>d&&d.result).sort((a,b)=>(a.result.at||0)-(b.result.at||0)).map(d=>d.result.total);const solved=new Set(SETS.filter(s=>{const d=loadStored(s.id);return d&&d.result;}).map(s=>s.id+'회'));const nextSets=recommendSets(avg[0].k).split('·').filter(x=>!solved.has(x));
   const trend=tot.length>=2?(tot[tot.length-1]-tot[0]>=0?`첫 회차 ${tot[0]}점 → 최근 ${tot[tot.length-1]}점 (${tot[tot.length-1]-tot[0]>=0?'+':''}${tot[tot.length-1]-tot[0]})`:`첫 회차 ${tot[0]}점 → 최근 ${tot[tot.length-1]}점 (${tot[tot.length-1]-tot[0]})`):'';
-  $('#allRx').innerHTML=`<div><b>${done}회차 누적 진단</b> — 평균 ${Math.round(tot.reduce((a,b)=>a+b,0)/tot.length)}점${trend?' · '+trend:''}<br>가장 약한 단원 <b>${nm(avg[0].k)}</b> (평균 ${avg[0].v}%)${avg[1]?`, 그다음 <b>${nm(avg[1].k)}</b> (${avg[1].v}%)`:''} → ${GUIDE[avg[0].k].how}<br>다음에 풀 회차: ${nextSets.length?nextSets.join('·'):'추천 회차를 모두 풀었습니다. 9·10회 실전 모의로 마무리'}</div>`;
-  $('#allRx').dataset.text=`[전체 회차 성적표]\n`+rows.join('\n')+`\n단원 평균: `+avg.map(a=>nm(a.k)+' '+a.v+'%').join(', ')+`\n가장 약한 단원: ${nm(avg[0].k)}`;
+  $('#allRx').innerHTML=`<div><b>${done}회차 누적 진단</b> — 평균 ${Math.round(tot.reduce((a,b)=>a+b,0)/tot.length)}점${trend?' · '+trend:''}<br>가장 약한 영역 <b>${nm(avg[0].k)}</b> (평균 ${avg[0].v}%)${avg[1]?`, 그다음 <b>${nm(avg[1].k)}</b> (${avg[1].v}%)`:''} → ${GUIDE[avg[0].k].how}<br>다음에 풀 회차: ${nextSets.length?nextSets.join('·'):'추천 회차를 모두 풀었습니다. 9·10회 실전 모의로 마무리'}</div>`;
+  $('#allRx').dataset.text=`[전체 회차 성적표]\n`+rows.join('\n')+`\n영역 평균: `+avg.map(a=>nm(a.k)+' '+a.v+'%').join(', ')+`\n가장 약한 영역: ${nm(avg[0].k)}`;
 }
 
 /* ---------- 이벤트 ---------- */
@@ -349,7 +348,7 @@ document.addEventListener('change',e=>{
 });
 document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')save();});
 
-let startId=1;try{startId=+(localStorage.getItem('sci-mid-2026-cur')||1)||1;}catch(e){}
+let startId=1;try{startId=+(localStorage.getItem('kor-mid-2026-cur')||1)||1;}catch(e){}
 loadSet(startId,false);renderOverall();
 </script>
 
