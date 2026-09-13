@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과학 2학기 중간 예상시험</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F6F7F4; --panel:#FFFFFF; --ink:#1B2430; --muted:#5C6773; --rule:#D8DDD9; --soft:#EEF2EE;
+  --accent:#0F6E56; --accent-ink:#FFFFFF; --ok:#0F6E56; --ok-bg:#E3F2EC; --bad:#B4342E; --bad-bg:#F9E6E4; --warn:#9A6B00; --warn-bg:#FBF1D6;
+  --serif:"Noto Serif KR",Georgia,serif; --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141A1F; --panel:#1C242B; --ink:#E7EBEE; --muted:#9AA5AF; --rule:#2F3A43; --soft:#222C34;
+  --accent:#4DB89A; --accent-ink:#0E1A16; --ok:#4DB89A; --ok-bg:#1B3A31; --bad:#E5766F; --bad-bg:#3F2321; --warn:#E3B95B; --warn-bg:#3B3117;
+}}
+:root[data-theme="dark"]{
+  --bg:#141A1F; --panel:#1C242B; --ink:#E7EBEE; --muted:#9AA5AF; --rule:#2F3A43; --soft:#222C34;
+  --accent:#4DB89A; --accent-ink:#0E1A16; --ok:#4DB89A; --ok-bg:#1B3A31; --bad:#E5766F; --bad-bg:#3F2321; --warn:#E3B95B; --warn-bg:#3B3117;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:0 80px}
+.wrap{max-width:760px;margin:0 auto}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);padding-block:10px 8px;margin-bottom:24px}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-size:26px;margin:2px 0 0;line-height:1.25;text-wrap:balance}
+.meta{color:var(--muted);font-size:13px;margin-top:4px}
+.stat{display:flex;gap:14px;align-items:baseline;font-variant-numeric:tabular-nums}
+.stat b{font-size:22px;font-family:var(--serif)}
+.stat span{font-size:12px;color:var(--muted)}
+.notice{background:var(--soft);border-left:3px solid var(--accent);padding:10px 14px;font-size:14px;margin:0 0 28px;border-radius:0 6px 6px 0}
+h2{font-family:var(--serif);font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h2 small{font-family:var(--sans);font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+.unit{font-size:12px;color:var(--muted);letter-spacing:.04em;margin:26px 0 4px}
+.q{padding:14px 0 10px;border-bottom:1px solid var(--rule)}
+.q .stem{display:flex;gap:10px;font-weight:500}
+.q .stem .n{font-family:var(--serif);font-weight:700;min-width:26px;color:var(--accent)}
+.box{border:1px solid var(--ink);padding:8px 14px;margin:10px 0 8px 36px;font-size:14px;background:var(--panel)}
+.box p{margin:2px 0}
+.choices{list-style:none;margin:8px 0 0 30px;padding:0;display:flex;flex-direction:column;gap:2px}
+.choices label{display:flex;gap:10px;align-items:flex-start;padding:5px 8px;border-radius:6px;cursor:pointer}
+.choices label:hover{background:var(--soft)}
+.choices input{position:absolute;opacity:0;width:0;height:0}
+.choices .c{flex:none;width:22px;height:22px;border:1.5px solid var(--muted);border-radius:50%;display:grid;place-items:center;font-size:12px;margin-top:2px;font-variant-numeric:tabular-nums}
+.choices input:checked + .c{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.choices input:focus-visible + .c{outline:2px solid var(--accent);outline-offset:2px}
+.graded .q.right .choices input:checked + .c{background:var(--ok);border-color:var(--ok);color:#fff}
+.graded .q.wrong .choices input:checked + .c{background:var(--bad);border-color:var(--bad);color:#fff}
+.graded .q.wrong .choices label.ans .c{border-color:var(--ok);border-width:2.5px;color:var(--ok);font-weight:700}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;font-weight:500}
+.tag.ok{background:var(--ok-bg);color:var(--ok)}.tag.bad{background:var(--bad-bg);color:var(--bad)}
+.exp{display:none;margin:10px 0 4px 36px;padding:10px 14px;background:var(--soft);border-radius:6px;font-size:14px}
+.graded .exp{display:block}
+.exp b{color:var(--accent)}
+.cause{display:none;margin:8px 0 0 36px;font-size:13px;gap:6px;flex-wrap:wrap;align-items:center}
+.graded .q.wrong .cause{display:flex}
+.cause select{font:inherit;font-size:13px;padding:3px 6px;border:1px solid var(--rule);border-radius:5px;background:var(--panel);color:var(--ink)}
+textarea{width:100%;min-height:110px;font:inherit;font-size:14px;padding:10px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);margin:8px 0 0 0;resize:vertical}
+.self{display:none;margin:8px 0 0;gap:12px;flex-wrap:wrap;font-size:13px;align-items:center}
+.graded .self{display:flex}
+.self label{display:flex;gap:4px;align-items:center;cursor:pointer}
+.model{margin:8px 0 0;font-size:14px}
+.model summary{cursor:pointer;color:var(--accent);font-weight:500}
+.model .body{padding:8px 12px;background:var(--soft);border-radius:6px;margin-top:6px}
+.model .crit{font-size:13px;color:var(--muted);margin-top:6px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 8px;align-items:center}
+button{font:inherit;font-weight:500;padding:10px 18px;border-radius:8px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:13px;color:var(--muted)}
+#report{display:none;margin-top:28px}
+.graded #report{display:block}
+.score{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end;padding:16px 18px;background:var(--panel);border:1px solid var(--rule);border-radius:10px}
+.score .big{font-family:var(--serif);font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.score .big small{font-size:16px;color:var(--muted);font-family:var(--sans)}
+.score .sub{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+th{font-size:12px;letter-spacing:.04em;color:var(--muted);font-weight:500}
+td.num{text-align:right}
+.bar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden;min-width:80px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.judge{font-size:12px;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.judge.ok{background:var(--ok-bg);color:var(--ok)}.judge.warn{background:var(--warn-bg);color:var(--warn)}.judge.bad{background:var(--bad-bg);color:var(--bad)}
+.tablewrap{overflow-x:auto}
+.rx{margin-top:14px;display:grid;gap:8px}
+.rx div{padding:10px 14px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;font-size:14px}
+.rx b{color:var(--accent)}
+pre.copy{white-space:pre-wrap;background:var(--panel);border:1px dashed var(--rule);padding:12px 14px;border-radius:8px;font-family:var(--sans);font-size:13px;margin-top:10px}
+footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
+@media (max-width:480px){.box,.choices,.exp,.cause{margin-left:0}.q .stem .n{min-width:22px}h1{font-size:22px}}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .5s ease}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <div class="eyebrow">비상교육 과학③ · 2학기 1차 정기고사 대비</div>
+    <h1>과학 2학기 중간 예상시험</h1>
+    <div class="meta">Ⅳ. 자극과 반응(130~151쪽) · Ⅴ. 생식과 유전(151~194쪽) · 선택형 19 + 논술형 4 · 45분</div>
+  </div>
+  <div class="stat"><div><b id="done">0</b><span>/19 답함</span></div><div><b id="scoreTop">–</b><span>점</span></div></div>
+</div></header>
+
+<div class="wrap">
+<p class="notice">교과서·학습지를 덮고 45분 알람을 맞춘 뒤 푸세요. 다 풀면 아래 <b>채점하기</b>를 누르면 점수·단원별 정답률·약점 처방이 자동으로 나오고, 맨 아래 요약을 복사해 코치에게 보내면 됩니다. 이 문제는 실제 기출이 아니라 시험 범위와 문항 구성(선택형 19·논술형 4)에 맞춘 예상문제입니다.</p>
+
+<h2>Ⅰ. 선택형 <small>19문항 · 각 4점</small></h2>
+<div id="mc"></div>
+
+<h2>Ⅱ. 논술형 <small>4문항 · 각 6점 · 채점 후 스스로 점수를 매깁니다</small></h2>
+<div id="es"></div>
+
+<div class="actions">
+  <button class="primary" id="grade">채점하기</button>
+  <button id="reset">다시 풀기</button>
+  <span class="hint" id="hint">답은 이 브라우저에 임시 저장됩니다.</span>
+</div>
+
+<section id="report">
+  <h2>Ⅲ. 결과와 약점 진단</h2>
+  <div class="score">
+    <div><div class="big"><span id="total">0</span><small> / 100</small></div><div class="sub">선택형 <span id="mcScore">0</span>/76 + 논술형 <span id="esScore">0</span>/24</div></div>
+    <div><div class="sub" id="verdict"></div></div>
+  </div>
+  <div class="tablewrap"><table id="unitTbl"><thead><tr><th>단원</th><th>문항</th><th class="num">정답</th><th>정답률</th><th>판정</th></tr></thead><tbody></tbody></table></div>
+  <div class="rx" id="rx"></div>
+  <h2 style="font-size:17px;margin-top:28px">코치에게 보낼 요약 <small>복사해서 붙여넣기</small></h2>
+  <pre class="copy" id="summary"></pre>
+  <div class="actions" style="margin-top:8px"><button id="copyBtn">요약 복사</button><span class="hint" id="copied"></span></div>
+</section>
+
+<footer>배점은 임의(선택형 4점·논술형 6점)이며 실제 배점은 학교 평가계획서로 확인하세요. 시험 범위 안내의 "학습지 및 필기 내용 포함"에 따라 수업 학습지의 그림·표는 따로 복습해야 합니다.</footer>
+</div>
+
+<script>
+const UNITS = {
+  s1:'Ⅳ-01 감각기관', s2:'Ⅳ-02 신경계', s3:'Ⅳ-02 호르몬', g1:'Ⅴ-01 생식', g2:'Ⅴ-02 유전'
+};
+const MC = [
+ {u:'s1',k:'눈의 구조·기능',stem:'눈의 구조와 기능을 옳게 짝지은 것이 <u>아닌</u> 것은?',c:['홍채 – 동공의 크기를 조절하여 눈으로 들어오는 빛의 양을 조절한다.','수정체 – 빛을 굴절시켜 망막에 상이 맺히게 한다.','망막 – 시각 세포가 있어 빛 자극을 받아들인다.','섬모체 – 빛의 양에 따라 동공의 크기를 조절한다.','맹점 – 시각 신경이 모여 나가는 곳으로 시각 세포가 없어 상이 맺혀도 보이지 않는다.'],a:4,e:'섬모체는 수정체의 두께를 조절한다. 빛의 양(동공 크기) 조절은 홍채의 역할이다.'},
+ {u:'s1',k:'눈의 조절 작용',stem:'어두운 영화관에 들어가 앞자리에 앉은 친구의 얼굴을 가까이에서 볼 때, 눈에서 일어나는 변화로 옳은 것만을 [보기]에서 있는 대로 고른 것은?',box:['ㄱ. 홍채가 축소되어 동공이 커진다.','ㄴ. 홍채가 확장되어 동공이 작아진다.','ㄷ. 섬모체가 수축하여 수정체가 두꺼워진다.','ㄹ. 섬모체가 이완하여 수정체가 얇아진다.'],c:['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],a:2,e:'어두운 곳: 홍채 축소 → 동공 확대(ㄱ). 가까운 물체: 섬모체 수축 → 수정체 두꺼워짐(ㄷ). "홍채↔동공"은 반대로, "섬모체↔수정체"는 같은 방향으로 움직인다.'},
+ {u:'s1',k:'귀의 구조·기능',stem:'비행기가 이륙할 때 귀가 먹먹해졌다가 침을 삼키니 나아졌다. 이와 관련된 귀의 구조와, 몸의 회전을 느끼는 구조를 순서대로 옳게 짝지은 것은?',c:['귀인두관 – 반고리관','귀인두관 – 전정 기관','달팽이관 – 반고리관','귓속뼈 – 전정 기관','고막 – 달팽이관'],a:1,e:'귀인두관은 고막 안팎의 압력을 같게 하고, 반고리관은 회전 감각, 전정 기관은 기울기(위치) 감각을 담당한다.'},
+ {u:'s1',k:'후각·미각·피부',stem:'후각, 미각, 피부 감각에 대한 설명으로 옳은 것은?',c:['매운맛은 혀의 미각 세포가 받아들이는 기본 맛 중 하나이다.','후각은 가장 예민한 감각이지만 쉽게 피로해져 같은 냄새를 오래 맡으면 잘 느끼지 못한다.','피부의 감각점 중 가장 적게 분포하는 것은 통점이다.','기본 맛은 단맛, 짠맛, 신맛, 쓴맛의 네 가지이다.','감기에 걸려 코가 막히면 미각 세포가 손상되어 음식 맛을 잘 느끼지 못한다.'],a:2,e:'매운맛은 피부 감각(통각)이다. 기본 맛은 단·짠·신·쓴·감칠맛 5가지. 통점은 감각점 중 가장 많다. 코가 막히면 후각을 못 느껴 맛을 잘 모르는 것이다.'},
+ {u:'s2',k:'뉴런',stem:'뉴런에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['뉴런은 신경계를 구성하는 기본 단위 세포이다.','감각 뉴런은 감각 기관에서 받아들인 자극을 중추로 전달한다.','연합 뉴런은 뇌와 척수를 구성하며 감각 뉴런과 운동 뉴런을 연결한다.','운동 뉴런은 중추의 명령을 반응 기관으로 전달한다.','자극은 운동 뉴런 → 연합 뉴런 → 감각 뉴런의 방향으로 전달된다.'],a:5,e:'자극 전달 방향은 감각 뉴런 → 연합 뉴런 → 운동 뉴런이다.'},
+ {u:'s2',k:'뇌의 구조·기능',stem:'뇌의 각 부분과 기능을 옳게 짝지은 것이 <u>아닌</u> 것은?',c:['대뇌 – 기억, 추리, 판단 등 정신 활동의 중추','소뇌 – 몸의 균형 유지, 근육 운동 조절','중간뇌 – 눈의 움직임과 동공 반사 조절','간뇌 – 심장 박동, 호흡 운동, 소화 운동 조절','연수 – 재채기, 침 분비, 하품 등의 반사 중추'],a:4,e:'심장 박동·호흡·소화 운동 조절은 연수의 기능이다. 간뇌는 체온·혈당량·체액 농도 등 항상성 유지 중추이다.'},
+ {u:'s2',k:'의식적 반응·무조건 반사',stem:'다음 반응 중 <b>척수</b>가 중추인 무조건 반사만을 있는 대로 고른 것은?',box:['ㄱ. 날아오는 공을 보고 손으로 잡았다.','ㄴ. 어두운 곳에 들어가자 동공이 커졌다.','ㄷ. 코에 먼지가 들어가 재채기를 했다.','ㄹ. 무릎 아래를 고무망치로 치자 다리가 저절로 올라갔다.','ㅁ. 압정을 밟자 생각할 겨를도 없이 발을 뗐다.'],c:['ㄱ, ㄴ','ㄱ, ㄹ','ㄴ, ㄷ','ㄷ, ㅁ','ㄹ, ㅁ'],a:5,e:'ㄹ 무릎 반사, ㅁ 회피 반사는 척수 반사. ㄴ 동공 반사는 중간뇌, ㄷ 재채기는 연수가 중추인 반사이고, ㄱ은 대뇌가 관여하는 의식적 반응이다. "반사"이면서 "척수"인 것만 골라야 한다.'},
+ {u:'s2',k:'자율 신경',stem:'긴장하거나 위급한 상황에서 작용하는 자율 신경의 종류와 그 작용을 옳게 짝지은 것은?',c:['교감 신경 – 동공 축소, 심장 박동 억제','교감 신경 – 동공 확대, 심장 박동 촉진, 소화 운동 억제','부교감 신경 – 동공 확대, 심장 박동 촉진','부교감 신경 – 동공 축소, 소화 운동 억제','체성 신경 – 심장 박동 촉진, 소화 운동 촉진'],a:2,e:'교감 신경은 긴장·위급 상황에서 동공 확대, 심장 박동·호흡 촉진, 소화 억제. 부교감 신경은 안정 상태에서 반대로 작용한다.'},
+ {u:'s3',k:'호르몬 종류·특징',stem:'호르몬에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['내분비샘에서 만들어져 혈액을 통해 온몸으로 운반된다.','신경에 비해 전달 속도는 느리지만 효과가 오래 지속되고 넓은 범위에 작용한다.','갑상샘에서 분비되는 티록신은 세포 호흡을 촉진한다.','이자에서 분비되는 글루카곤은 혈당량을 낮춘다.','뇌하수체에서는 생장 호르몬, 갑상샘 자극 호르몬, 항이뇨 호르몬 등이 분비된다.'],a:4,e:'글루카곤은 혈당량을 높이고, 인슐린이 혈당량을 낮춘다. 둘 다 이자에서 분비된다.'},
+ {u:'s3',k:'항상성(체온 조절)',stem:'추운 겨울날 밖에 오래 서 있을 때 체온을 일정하게 유지하기 위해 우리 몸에서 일어나는 변화로 옳은 것만을 있는 대로 고른 것은?',box:['ㄱ. 티록신 분비가 증가하여 세포 호흡이 활발해진다.','ㄴ. 피부 근처 혈관이 확장되어 열 방출량이 늘어난다.','ㄷ. 근육이 떨려 열 발생량이 증가한다.','ㄹ. 피부 근처 혈관이 수축하여 열 방출량이 줄어든다.'],c:['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],a:4,e:'체온이 낮아지면 티록신 분비 증가(열 발생↑), 근육 떨림(열 발생↑), 피부 혈관 수축(열 방출↓). ㄴ은 더울 때의 반응이다.'},
+ {u:'s3',k:'호르몬 관련 질병',stem:'호르몬의 분비 이상으로 나타나는 질병과 그 원인을 옳게 짝지은 것은?',c:['거인증 – 성장기 이후 생장 호르몬 과다','소인증 – 성장기에 티록신 부족','갑상샘 기능 항진증 – 티록신 과다 분비로 체중 감소, 눈이 돌출됨','갑상샘 기능 저하증 – 티록신 과다 분비로 몸이 붓고 추위를 잘 탐','당뇨병 – 글루카곤 부족으로 혈당량이 높게 유지됨'],a:3,e:'거인증은 성장기에 생장 호르몬 과다(성장기 이후 과다는 말단 비대증). 소인증은 생장 호르몬 부족. 저하증은 티록신 부족. 당뇨병은 인슐린 부족.'},
+ {u:'g1',k:'염색체',stem:'사람의 염색체에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['체세포에는 46개(23쌍)의 염색체가 들어 있다.','남녀에게 공통으로 있는 22쌍의 염색체를 상염색체라고 한다.','남자의 성염색체 구성은 XY, 여자의 성염색체 구성은 XX이다.','염색체는 DNA와 단백질로 이루어지며 DNA의 특정 부분이 유전자이다.','상동 염색체는 크기와 모양이 같은 한 쌍의 염색체로, 둘 다 어머니에게서 물려받는다.'],a:5,e:'상동 염색체는 하나는 아버지, 하나는 어머니에게서 물려받는다.'},
+ {u:'g1',k:'체세포 분열',stem:'체세포 분열의 각 시기에 대한 설명으로 옳은 것은?',c:['간기 – 염색체가 막대 모양으로 응축되어 관찰된다.','전기 – 핵막이 사라지고 두 가닥의 염색 분체로 된 염색체가 나타난다.','중기 – 염색 분체가 분리되어 양극으로 이동한다.','후기 – 염색체가 세포 중앙(적도면)에 배열된다.','말기 – 식물 세포는 세포막이 바깥에서 안쪽으로 잘록하게 들어가 세포질이 나뉜다.'],a:2,e:'간기: DNA 복제(염색체는 보이지 않음). 중기: 적도면 배열. 후기: 염색 분체 분리. 말기: 동물 세포는 밖에서 안으로 잘록, 식물 세포는 안쪽에 세포판 형성.'},
+ {u:'g1',k:'감수 분열 비교',stem:'체세포 분열(A)과 감수 분열(B)을 비교한 것으로 옳은 것만을 있는 대로 고른 것은?',box:['ㄱ. A는 1회, B는 2회 연속 분열한다.','ㄴ. 딸세포의 수는 A가 4개, B가 2개이다.','ㄷ. B의 감수 1분열 전기에는 상동 염색체가 결합한 2가 염색체가 나타난다.','ㄹ. 딸세포의 염색체 수는 A에서는 모세포와 같고, B에서는 절반으로 줄어든다.'],c:['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],a:4,e:'딸세포 수는 체세포 분열 2개, 감수 분열 4개이므로 ㄴ이 틀렸다.'},
+ {u:'g1',k:'수정과 발생',stem:'사람의 생식과 발생에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['정자는 정소에서, 난자는 난소에서 감수 분열로 만들어진다.','정자는 난자보다 크기가 작고 꼬리(편모)가 있어 운동할 수 있다.','수정은 보통 수란관 앞부분에서 일어나며, 수정란의 염색체 수는 46개이다.','난할이 진행될수록 세포 하나의 크기는 점점 작아지고 배아 전체의 크기는 거의 변하지 않는다.','수정란은 난할을 거친 뒤 자궁 안쪽 벽에 착상하는데, 착상 직후 곧바로 태반이 완성되어 출산까지 약 8주가 걸린다.'],a:5,e:'착상은 수정 후 약 5~7일 무렵 포배 상태로 일어나며, 태반은 착상 후 점차 형성된다. 임신 기간은 수정 후 약 266일(약 38주)이다.'},
+ {u:'g2',k:'멘델 – 분리의 법칙',stem:'순종의 둥근 완두(RR)와 순종의 주름진 완두(rr)를 교배하여 얻은 잡종 1대(F1)를 자가 수분하여 잡종 2대(F2)를 얻었다. 이에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['F1의 유전자형은 모두 Rr이고 표현형은 모두 둥근 모양이다.','F2에서 둥근 완두 : 주름진 완두의 비는 약 3 : 1이다.','F2의 유전자형 비는 RR : Rr : rr = 1 : 2 : 1이다.','F2의 둥근 완두 중 순종의 비율은 1/2이다.','F1이 생식세포를 만들 때 R와 r가 서로 다른 생식세포로 나뉘어 들어가는 것을 분리의 법칙이라고 한다.'],a:4,e:'F2 둥근 완두는 RR : Rr = 1 : 2이므로 순종(RR)의 비율은 1/3이다.'},
+ {u:'g2',k:'멘델 – 독립의 법칙',stem:'둥글고 노란 완두(RrYy)를 자가 수분하여 얻은 잡종 2대의 완두가 총 800개일 때, 이 중 주름지고 녹색인 완두의 수로 예상되는 값은? (두 형질은 독립적으로 유전되며 R, Y가 우성)',c:['50개','100개','150개','200개','450개'],a:1,e:'RrYy 자가 수분 → 9 : 3 : 3 : 1. 주름·녹색(rryy)은 1/16이므로 800 × 1/16 = 50개.'},
+ {u:'g2',k:'ABO식 혈액형',stem:'아버지의 혈액형이 A형(AO), 어머니의 혈액형이 B형(BO)일 때, 이 부모 사이에서 태어날 수 있는 자녀의 혈액형에 대한 설명으로 옳은 것은?',c:['자녀에게서 O형은 나올 수 없다.','AB형이 태어날 확률은 1/2이다.','A형, B형, AB형, O형이 모두 나올 수 있으며 각각의 확률은 1/4이다.','A형과 B형만 나올 수 있다.','자녀의 혈액형은 모두 부모 중 한 사람과 같다.'],a:3,e:'AO × BO → AB, AO, BO, OO가 각각 1/4씩. 네 가지 혈액형이 모두 가능하다.'},
+ {u:'g2',k:'사람의 유전 연구',stem:'사람의 유전 연구에 대한 설명으로 옳지 <u>않은</u> 것은?',c:['사람은 한 세대가 길고 자손의 수가 적어 유전 연구가 어렵다.','사람은 완두처럼 마음대로 교배 실험을 할 수 없다.','가계도 조사는 특정 형질이 여러 세대에 걸쳐 어떻게 유전되는지 알아보는 방법이다.','1란성 쌍둥이의 형질 차이를 비교하면 환경이 형질에 미치는 영향을 알 수 있다.','혀 말기, 귓불 모양, 색맹은 모두 상염색체에 있는 유전자에 의해 유전된다.'],a:5,e:'혀 말기·귓불 모양은 상염색체 유전, 색맹은 X 염색체에 있는 유전자에 의한 반성유전이다.'},
+];
+const ES = [
+ {u:'s2',k:'반응 경로',stem:'뜨거운 냄비에 손이 닿았을 때 자신도 모르게 손을 떼는 반응이 일어난다. (1) 자극이 전달되어 반응이 일어나기까지의 경로를 순서대로 쓰고, (2) 이 반응이 의식적인 반응과 다른 점을 중추와 반응 속도를 포함하여 서술하고, (3) 이러한 반응이 우리 몸에 유리한 까닭을 쓰시오.',m:'(1) 피부(감각 기관) → 감각 뉴런 → 척수(연합 뉴런) → 운동 뉴런 → 팔의 근육(반응 기관). (2) 의식적 반응은 대뇌가 중추이지만 이 반응은 척수가 중추이며, 대뇌를 거치지 않으므로 훨씬 빠르다. 손을 뗀 뒤에야 "뜨겁다"는 느낌이 대뇌에 전달된다. (3) 위험한 자극에 매우 빠르게 반응하여 몸을 보호할 수 있다.',crit:'경로 5단계 2점 · 중추·속도 비교 2점 · 의의 2점. "척수", "대뇌를 거치지 않음"이 빠지면 감점.'},
+ {u:'s3',k:'혈당량 조절',stem:'식사를 한 뒤 혈당량이 높아졌을 때 우리 몸에서 혈당량을 정상 범위로 되돌리는 과정을 서술하시오. (관여하는 호르몬의 이름과 분비 기관, 그 호르몬의 작용 두 가지를 반드시 포함) 또 혈당량이 낮아졌을 때 작용하는 호르몬의 이름과 작용도 함께 쓰시오.',m:'혈당량이 높아지면 이자에서 인슐린이 분비된다. 인슐린은 ① 간에서 포도당을 글리코젠으로 합성하여 저장하게 하고 ② 세포가 혈액 속 포도당을 흡수하여 이용하도록 촉진하여 혈당량을 낮춘다. 혈당량이 낮아지면 이자에서 글루카곤이 분비되어 간의 글리코젠을 포도당으로 분해하여 혈액으로 내보내므로 혈당량이 높아진다.',crit:'호르몬 이름·기관 1점 · 인슐린 작용 2가지 각 1점 · 글루카곤 이름·작용 2점 · 전체 논리 1점. "글리코젠" 누락 시 감점.'},
+ {u:'g1',k:'감수 분열의 의의',stem:'감수 분열 결과 만들어진 생식세포의 염색체 수는 모세포의 절반이 된다. (1) 감수 분열 과정 중 어느 시기에, 어떤 과정을 거쳐 염색체 수가 절반으로 줄어드는지 "2가 염색체"와 "상동 염색체"라는 용어를 사용하여 서술하고, (2) 생식세포의 염색체 수가 절반으로 줄어드는 것이 생물에게 어떤 의의가 있는지 서술하시오.',m:'(1) 감수 1분열 전기에 상동 염색체가 짝을 지어 2가 염색체를 이루고, 감수 1분열 후기에 2가 염색체를 이루던 상동 염색체가 분리되어 서로 다른 딸세포로 들어가므로 염색체 수가 절반으로 줄어든다. (감수 2분열에서는 염색 분체만 분리되므로 염색체 수는 변하지 않는다.) (2) 염색체 수가 절반인 정자와 난자가 수정하여 원래의 염색체 수(46개)가 되므로, 세대를 거듭해도 자손의 염색체 수가 일정하게 유지된다.',crit:'시기(감수 1분열) 1점 · 2가 염색체 형성 1점 · 상동 염색체 분리 2점 · 의의 2점.'},
+ {u:'g2',k:'반성유전 가계도',stem:'색맹을 나타내지 않는 부모 사이에서 색맹인 아들이 태어났다. (1) 아버지와 어머니의 유전자형을 쓰고 그렇게 판단한 근거를 서술하시오. (2) 이 부모 사이에서 딸이 태어날 때 그 딸이 색맹일 확률을 쓰고 까닭을 서술하시오. (3) 색맹이 여자보다 남자에게 더 많이 나타나는 까닭을 서술하시오. (색맹 유전자는 X 염색체에 있는 열성 유전자, 정상 X · 색맹 X′)',m:'(1) 아버지 XY, 어머니 XX′. 색맹 아들(X′Y)의 X′는 어머니에게서 받은 것이므로 어머니는 보인자이고, 아버지는 정상이므로 XY이다. (2) 0. 딸은 아버지에게서 반드시 정상 X를 받으므로 색맹(X′X′)이 될 수 없다. 딸은 XX 또는 XX′(보인자)이다. (3) 남자는 X 염색체가 하나뿐이어서 X′를 하나만 받아도 색맹이 되지만, 여자는 X′를 두 개 받아야 색맹이 되기 때문이다.',crit:'부모 유전자형 1점 · 근거 1점 · 딸 확률 0과 까닭 2점 · 남자에 많은 까닭 2점.'},
+];
+const CIRC=['①','②','③','④','⑤'];
+const CAUSES={A:'개념을 몰랐다',B:'알았는데 헷갈렸다',C:'알았는데 실수했다',D:'시간이 부족했다'};
+const RX={A:'해당 소단원 교과서 본문을 다시 읽고 인강 해당 강의를 1.5배속으로 재수강 → 백지에 핵심 용어·그림을 그려 복기 → 다음 날 재풀이',B:'헷갈리는 쌍을 비교표로 한 장에 정리(교감/부교감, 체세포/감수 분열, 인슐린/글루카곤, 홍채/섬모체) → 시험 전날 다시 본다',C:'"옳지 않은 것", "있는 대로 고른 것"에 밑줄 치기. 문제를 끝까지 읽기 전에 답 고르지 않기. 비율(9:3:3:1)을 먼저 쓰고 계산',D:'선택형 1문항 1.5분 기준으로 연습. 논술형은 채점 기준의 키워드(척수, 글리코젠, 2가 염색체 등)부터 쓰고 문장을 붙인다'};
+
+const mcEl=document.getElementById('mc'), esEl=document.getElementById('es');
+let lastUnit='';
+MC.forEach((q,i)=>{
+  const n=i+1;
+  if(q.u!==lastUnit){lastUnit=q.u;const u=document.createElement('div');u.className='unit';u.textContent=UNITS[q.u];mcEl.appendChild(u);}
+  const d=document.createElement('div');d.className='q';d.id='q'+n;
+  d.innerHTML=`<div class="stem"><span class="n">${n}.</span><span>${q.stem}<span class="tag" id="t${n}"></span></span></div>`+
+   (q.box?`<div class="box"><p><b>[보기]</b></p>${q.box.map(b=>`<p>${b}</p>`).join('')}</div>`:'')+
+   `<ul class="choices">${q.c.map((c,j)=>`<li><label class="${j+1===q.a?'ans':''}"><input type="radio" name="q${n}" id="q${n}c${j+1}" value="${j+1}"><span class="c">${CIRC[j]}</span><span>${c}</span></label></li>`).join('')}</ul>`+
+   `<div class="exp"><b>정답 ${CIRC[q.a-1]}</b> · ${q.e}</div>`+
+   `<div class="cause"><span>틀린 원인:</span><select id="cause${n}"><option value="">선택</option>${Object.entries(CAUSES).map(([k,v])=>`<option value="${k}">${k}. ${v}</option>`).join('')}</select></div>`;
+  mcEl.appendChild(d);
+});
+ES.forEach((q,i)=>{
+  const n=i+1;
+  const d=document.createElement('div');d.className='q';d.id='e'+n;
+  d.innerHTML=`<div class="stem"><span class="n">논${n}.</span><span>${q.stem} <span class="hint">[${UNITS[q.u]}]</span></span></div>`+
+   `<textarea id="es${n}" placeholder="답안을 적으세요 (키워드부터)"></textarea>`+
+   `<details class="model"><summary>모범 답안과 채점 기준 보기</summary><div class="body">${q.m}<div class="crit">채점 기준(6점): ${q.crit}</div></div></details>`+
+   `<div class="self"><span>스스로 채점(6점 만점):</span>${[0,1,2,3,4,5,6].map(v=>`<label><input type="radio" name="es${n}s" id="es${n}s${v}" value="${v}">${v}</label>`).join('')}</div>`;
+  esEl.appendChild(d);
+});
+
+const $=s=>document.querySelector(s);
+function getMC(n){const r=document.querySelector(`input[name=q${n}]:checked`);return r?+r.value:0;}
+function getES(n){const r=document.querySelector(`input[name=es${n}s]:checked`);return r?+r.value:null;}
+function save(){try{const st={mc:MC.map((_,i)=>getMC(i+1)),es:ES.map((_,i)=>$('#es'+(i+1)).value),ess:ES.map((_,i)=>getES(i+1)),cause:MC.map((_,i)=>$('#cause'+(i+1)).value),graded:document.body.classList.contains('graded')};localStorage.setItem('sci-mid-2026',JSON.stringify(st));}catch(e){}}
+function load(){try{const st=JSON.parse(localStorage.getItem('sci-mid-2026')||'null');if(!st)return;st.mc.forEach((v,i)=>{if(v){const el=$(`#q${i+1}c${v}`);if(el)el.checked=true;}});st.es.forEach((v,i)=>$('#es'+(i+1)).value=v||'');(st.ess||[]).forEach((v,i)=>{if(v!==null&&v!==undefined){const el=$(`#es${i+1}s${v}`);if(el)el.checked=true;}});(st.cause||[]).forEach((v,i)=>{$('#cause'+(i+1)).value=v||'';});if(st.graded)grade();}catch(e){}}
+function count(){const c=MC.filter((_,i)=>getMC(i+1)).length;$('#done').textContent=c;}
+
+function grade(){
+  let mcScore=0;const wrong=[];const unit={};
+  Object.keys(UNITS).forEach(k=>unit[k]={n:0,ok:0,items:[]});
+  MC.forEach((q,i)=>{const n=i+1,v=getMC(n),el=$('#q'+n),t=$('#t'+n);const ok=v===q.a;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);t.className='tag '+(ok?'ok':'bad');t.textContent=ok?'정답':(v?'오답':'미응답');if(ok)mcScore+=4;else wrong.push(n);unit[q.u].n++;if(ok)unit[q.u].ok++;else unit[q.u].items.push(n);});
+  let esScore=0;ES.forEach((q,i)=>{const s=getES(i+1);if(s!==null)esScore+=s;unit[q.u].n++;if(s!==null&&s>=4)unit[q.u].ok++;else unit[q.u].items.push('논'+(i+1));});
+  const total=mcScore+esScore;
+  $('#total').textContent=total;$('#scoreTop').textContent=total;$('#mcScore').textContent=mcScore;$('#esScore').textContent=esScore;
+  $('#verdict').textContent=total>=90?'안정권. 학습지·필기 내용과 논술형 키워드만 마지막으로 점검하세요.':total>=75?'상위권 진입 가능. 틀린 단원을 아래 처방대로 보강하면 됩니다.':total>=60?'보강 필요. 60% 미만 단원부터 교과서 본문으로 돌아가세요.':'집중 보강 필요. 인강 해당 단원을 다시 듣고 이 시험을 3일 뒤 재풀이하세요.';
+  const tb=$('#unitTbl tbody');tb.innerHTML='';const lines=[];
+  Object.entries(unit).forEach(([k,u])=>{const r=Math.round(u.ok/u.n*100);const j=r>=80?['ok','안정']:r>=60?['warn','보강']:['bad','집중'];
+    tb.insertAdjacentHTML('beforeend',`<tr><td>${UNITS[k]}</td><td class="num">${u.n}</td><td class="num">${u.ok}</td><td><div class="bar"><i style="width:${r}%"></i></div><span class="hint">${r}%</span></td><td><span class="judge ${j[0]}">${j[1]}</span></td></tr>`);
+    lines.push(`${UNITS[k]}: ${u.ok}/${u.n} (${r}%) ${j[1]}${u.items.length?' · 틀린 문항 '+u.items.join(', '):''}`);});
+  const causes={};MC.forEach((q,i)=>{const n=i+1;if(getMC(n)!==q.a){const c=$('#cause'+n).value||'?';causes[c]=(causes[c]||[]);causes[c].push(n);}});
+  const rx=$('#rx');rx.innerHTML='';Object.entries(causes).forEach(([c,ns])=>{if(RX[c])rx.insertAdjacentHTML('beforeend',`<div><b>${c}. ${CAUSES[c]}</b> — ${ns.join(', ')}번<br>${RX[c]}</div>`);});
+  if(wrong.length&&!Object.keys(causes).some(c=>RX[c]))rx.innerHTML='<div class="hint">틀린 문항마다 "틀린 원인"을 고르면 원인별 처방이 여기에 나옵니다.</div>';
+  const wl=wrong.map(n=>`${n}번(${MC[n-1].k}) 내답 ${getMC(n)?CIRC[getMC(n)-1]:'무응답'}/정답 ${CIRC[MC[n-1].a-1]}${$('#cause'+n).value?' 원인 '+$('#cause'+n).value:''}`);
+  $('#summary').textContent=`[과학 2학기 중간 예상시험 결과]\n총점 ${total}/100 (선택형 ${mcScore}/76, 논술형 자가채점 ${esScore}/24)\n`+lines.join('\n')+`\n틀린 선택형: ${wl.length?wl.join('; '):'없음'}\n논술형 자가채점: ${ES.map((_,i)=>'논'+(i+1)+' '+(getES(i+1)??'-')).join(', ')}`;
+  document.body.classList.add('graded');save();
+}
+$('#grade').addEventListener('click',()=>{grade();$('#report').scrollIntoView({behavior:'smooth'});});
+$('#reset').addEventListener('click',()=>{document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);document.querySelectorAll('textarea').forEach(t=>t.value='');document.querySelectorAll('select').forEach(s=>s.value='');document.body.classList.remove('graded');document.querySelectorAll('.q').forEach(q=>q.classList.remove('right','wrong'));document.querySelectorAll('.tag').forEach(t=>{t.className='tag';t.textContent='';});$('#scoreTop').textContent='–';count();save();window.scrollTo({top:0,behavior:'smooth'});});
+$('#copyBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#summary').textContent);$('#copied').textContent='복사됨';}catch(e){$('#copied').textContent='직접 드래그해서 복사하세요';}});
+document.addEventListener('change',e=>{count();if(document.body.classList.contains('graded'))grade();else save();});
+document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')save();});
+load();count();
+</script>
+
+</body>
+</html>
