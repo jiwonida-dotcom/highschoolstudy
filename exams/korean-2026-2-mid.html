@@ -459,6 +459,10 @@ body:not(.graded) .jump a[data-g]{display:none}
   .krtimer{margin-top:4px}
   .krunits{display:none}
 }
+
+/* 계산·풀이 주의 배너 (교과서 배너와 같은 틀, 색만 다름) */
+.bookfirst.calc{background:var(--ok-bg);color:var(--ink)}
+.bookfirst.note{background:var(--soft);color:var(--ink)}
 </style>
 
 <header class="top"><div class="wrap">
@@ -1128,17 +1132,33 @@ loadSet(startId,false);renderOverall();
 })();
 </script>
 <script>
+window.EXAM_TOOLS={
+  pfx:"kor-mid-2026v2",
+  durMin:45,
+  perMcSec:90,
+  progressTitle:"작품·영역별 진행",
+  trapUnit:"1-(1) 해석의 관점",
+  trapHTML:"<div class=\"termcard\"><div class=\"tc-h\">용어 대조 — 이 시험지 용어 ↔ 교과서 표현</div><table><thead><tr><th>시험지</th><th>교과서 표현</th><th>근거를 어디서 찾나</th></tr></thead><tbody><tr><td>절대론</td><td>내적 요소</td><td>작품 자체 — 시어·심상·구조·표현법</td></tr><tr><td>표현론</td><td>외적 요소 · 작가의 삶</td><td>작가의 생애·사상</td></tr><tr><td>반영론</td><td>외적 요소 · 사회문화적 배경</td><td>작품이 쓰인 시대 현실</td></tr><tr><td>효용론</td><td>외적 요소 · 독자에게 주는 의미</td><td>독자가 받은 감동·교훈</td></tr></tbody></table><p class=\"tc-f\">내재적 관점은 <b>절대론 하나</b>, 나머지 셋은 외재적입니다. 답을 쓸 때는 <b>학습지에서 선생님이 쓴 용어</b>로 쓰세요 — 어느 쪽 용어를 쓰는지 학습지에서 먼저 확인하세요.</p></div>",
+  banners:{
+  "1-(2) 가난한 사랑 노래": "「가난한 사랑 노래」는 저작권 보호 작품이라 <b>본문이 실려 있지 않습니다.</b> 교과서에서 시 전문을 먼저 읽고 오세요 — 부제·설의법 반복·마지막 두 행을 확인하면 아래 문항이 풀립니다.",
+  "1-(2) 기억 속의 들꽃": "「기억 속의 들꽃」도 <b>본문이 실려 있지 않습니다.</b> 교과서 수록 부분을 먼저 읽고, 명선이·금반지·끊어진 다리·쥐바라숭꽃이 나오는 장면에 표시해 두세요.",
+  "2-(1) 비교하며 읽기": "2단원 두 글(「젓가락으로 시작하는 밥상머리 교육」·「젓가락질 잘해야만 밥 잘 먹나요」) <b>본문도 실려 있지 않습니다.</b> 교과서를 먼저 읽고 각 글의 관점과 근거를 한 줄로 정리한 뒤 푸세요."
+}
+};
+
 /* ══════════════════════════════════════════════════════════════════
-   국어 전용 v3 (2026-09-25)
+   시험지 공용 도구 v3 (2026-09-25)
+   과목별 설정은 이 스크립트 앞에서 window.EXAM_TOOLS 로 넘긴다.
    기존 코드를 고치지 않고 DOM에 도구만 덧붙인다. 실패하면 조용히 빠진다.
    ══════════════════════════════════════════════════════════════════ */
 (function(){
   'use strict';
   try{
 
-  var PFX='kor-mid-2026v2';
-  var DUR=45*60*1000;          /* 45분 */
-  var PER_MC=90*1000;          /* 선택형 1문항 1.5분 (오답 처방 기준과 동일) */
+  var C=window.EXAM_TOOLS; if(!C) return;
+  var PFX=C.pfx;
+  var DUR=(C.durMin||45)*60*1000;
+  var PER_MC=(C.perMcSec||90)*1000;   /* 선택형 1문항당 기준 시간 = 오답 처방의 기준과 동일 */
   var rail=document.querySelector('.rail');
   var paper=document.querySelector('.paper');
   var mcEl=document.getElementById('mc');
@@ -1150,28 +1170,10 @@ loadSet(startId,false);renderOverall();
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
-  /* ─────────── 본문이 실려 있지 않은 작품 안내 ───────────
-     범위는 교과서 86~130쪽. 작품별 정확한 쪽수는 확인되지 않아 적지 않는다. */
-  var BOOK_FIRST={
-    '1-(2) 가난한 사랑 노래':'「가난한 사랑 노래」는 저작권 보호 작품이라 <b>본문이 실려 있지 않습니다.</b> 교과서에서 시 전문을 먼저 읽고 오세요 — 부제·설의법 반복·마지막 두 행을 확인하면 아래 문항이 풀립니다.',
-    '1-(2) 기억 속의 들꽃':'「기억 속의 들꽃」도 <b>본문이 실려 있지 않습니다.</b> 교과서 수록 부분을 먼저 읽고, 명선이·금반지·끊어진 다리·쥐바라숭꽃이 나오는 장면에 표시해 두세요.',
-    '2-(1) 비교하며 읽기':'2단원 두 글(「젓가락으로 시작하는 밥상머리 교육」·「젓가락질 잘해야만 밥 잘 먹나요」) <b>본문도 실려 있지 않습니다.</b> 교과서를 먼저 읽고 각 글의 관점과 근거를 한 줄로 정리한 뒤 푸세요.'
-  };
-
-  /* ─────────── 용어 대조 (교과서 표현 vs 문항 용어) ─────────── */
-  var TERM_UNIT='1-(1) 해석의 관점';
-  var TERM_HTML=
-   '<div class="termcard">'
-   +'<div class="tc-h">용어 대조 — 이 시험지 용어 ↔ 교과서 표현</div>'
-   +'<table><thead><tr><th>시험지</th><th>교과서 표현</th><th>근거를 어디서 찾나</th></tr></thead><tbody>'
-   +'<tr><td>절대론</td><td>내적 요소</td><td>작품 자체 — 시어·심상·구조·표현법</td></tr>'
-   +'<tr><td>표현론</td><td>외적 요소 · 작가의 삶</td><td>작가의 생애·사상</td></tr>'
-   +'<tr><td>반영론</td><td>외적 요소 · 사회문화적 배경</td><td>작품이 쓰인 시대 현실</td></tr>'
-   +'<tr><td>효용론</td><td>외적 요소 · 독자에게 주는 의미</td><td>독자가 받은 감동·교훈</td></tr>'
-   +'</tbody></table>'
-   +'<p class="tc-f">내재적 관점은 <b>절대론 하나</b>, 나머지 셋은 외재적입니다. '
-   +'답을 쓸 때는 <b>학습지에서 선생님이 쓴 용어</b>로 쓰세요 — 어느 쪽 용어를 쓰는지 학습지에서 먼저 확인하세요.</p>'
-   +'</div>';
+  var BANNERS=C.banners||{};        /* 단원 라벨 → 배너 HTML */
+  var TRAP_UNIT=C.trapUnit||'';     /* 함정 카드를 붙일 단원 라벨 */
+  var TRAP_HTML=C.trapHTML||'';
+  var PROG_TITLE=C.progressTitle||'단원·영역별 진행';
 
   /* ═══════════ 1. 모드 (시험처럼 / 보면서) ═══════════ */
   function modeKey(id){return PFX+'-mode'+id;}
@@ -1286,11 +1288,21 @@ loadSet(startId,false);renderOverall();
   }
 
   /* ═══════════ 3. 논술형 도구 ═══════════ */
-  function modelChars(details){
-    var body=details.querySelector('.body'); if(!body) return 0;
+  /* 모범답안의 언어를 보고 단위를 고른다 — 영작 문항은 '자'가 아니라 '단어'로 센다 */
+  function measure(text,unit){
+    if(unit==='단어') return (text||'').trim().split(/\s+/).filter(Boolean).length;
+    return (text||'').replace(/\s+/g,'').length;
+  }
+  function modelSpec(details){
+    var body=details.querySelector('.body'); if(!body) return null;
     var c=body.cloneNode(true);
     c.querySelectorAll('.crit,.core').forEach(function(n){n.remove();});
-    return (c.textContent||'').replace(/\s+/g,'').length;
+    var t=(c.textContent||'').trim();
+    var ascii=(t.match(/[A-Za-z]/g)||[]).length, han=(t.match(/[\uAC00-\uD7A3]/g)||[]).length;
+    /* 영작 문항(사실상 순수 영문)만 '단어'로 센다. 수학처럼 한글+수식이 섞인
+       모범답안은 '자'로 센다 — ascii 우세만 보면 수식 때문에 오판한다. */
+    var unit=(han<=2&&ascii>=8)?'단어':'자';
+    return {unit:unit, n:measure(t,unit)};
   }
   function buildES(){
     var esEl=document.getElementById('es'); if(!esEl) return;
@@ -1301,24 +1313,25 @@ loadSet(startId,false);renderOverall();
       var det=q.querySelector('details.model');
       if(!ta||!det) return;
 
-      var target=modelChars(det);
+      var spec=modelSpec(det)||{unit:'자',n:0};
+      var target=spec.n, U=spec.unit;
       var meter=document.createElement('div');
       meter.className='esmeter';
-      meter.innerHTML='<span class="cc">0자</span>'
-        +'<span>공백 제외</span>'
-        +'<span class="tgt">모범답안 '+target+'자</span>';
+      meter.innerHTML='<span class="cc">0'+U+'</span>'
+        +'<span>'+(U==='자'?'공백 제외':'영작')+'</span>'
+        +'<span class="tgt">모범답안 '+target+U+'</span>';
       ta.insertAdjacentElement('afterend',meter);
 
       function upd(){
-        var n=(ta.value||'').replace(/\s+/g,'').length;
-        meter.querySelector('.cc').textContent=n+'자';
+        var n=measure(ta.value,U);
+        meter.querySelector('.cc').textContent=n+U;
         meter.classList.remove('short','ok');
         if(!n) return;
         if(target&&n<target*0.5) meter.classList.add('short');
         else if(target&&n>=target*0.7) meter.classList.add('ok');
       }
       ta.addEventListener('input',upd); upd();
-      ta.placeholder='채점 기준의 키워드부터 쓰고 문장을 붙이세요';
+      ta.placeholder=(U==='단어')?'주어진 단어를 모두 쓰고 시제·수·어순을 확인하세요':'채점 기준의 키워드부터 쓰고 문장을 붙이세요';
 
       /* 채점 기준을 자가채점 바로 위에 — 채점 후에만 보인다 */
       var crit=det.querySelector('.crit');
@@ -1355,7 +1368,7 @@ loadSet(startId,false);renderOverall();
   /* ═══════════ 4. 작품·영역별 진행 + 배너 + 용어 카드 ═══════════ */
   var units=document.createElement('div');
   units.className='krunits';
-  units.innerHTML='<h3>작품·영역별 진행</h3><div class="ul"></div>';
+  units.innerHTML='<h3>'+PROG_TITLE+'</h3><div class="ul"></div>';
   if(tm.nextSibling) rail.insertBefore(units,tm.nextSibling); else rail.appendChild(units);
 
   function groups(){
@@ -1371,16 +1384,18 @@ loadSet(startId,false);renderOverall();
       if(!g.el.id) g.el.id='kru'+i;
       if(g.el.dataset.krDone) return;
       g.el.dataset.krDone='1';
-      var bf=BOOK_FIRST[g.label];
+      var bf=BANNERS[g.label];
       if(bf){
         var b=document.createElement('div');
-        b.className='bookfirst';
-        b.innerHTML='<span class="bf-i" aria-hidden="true">📖</span><span>'+bf+'</span>';
+        var ic='📖', txt=bf;
+        if(typeof bf==='object'){ ic=bf.icon||'📖'; txt=bf.html; }
+        b.className='bookfirst'+(typeof bf==='object'&&bf.kind?' '+bf.kind:'');
+        b.innerHTML='<span class="bf-i" aria-hidden="true">'+ic+'</span><span>'+txt+'</span>';
         g.el.insertAdjacentElement('afterend',b);
       }
-      if(g.label===TERM_UNIT){
+      if(TRAP_HTML&&g.label===TRAP_UNIT){
         var t=document.createElement('div');
-        t.innerHTML=TERM_HTML;
+        t.innerHTML=TRAP_HTML;
         g.el.insertAdjacentElement('afterend',t.firstChild);
       }
     });
@@ -1418,7 +1433,7 @@ loadSet(startId,false);renderOverall();
   refresh();
   if(getMode()==='exam'&&!tstate()) tmStart();
 
-  }catch(err){ /* 국어 전용 도구 실패 — 시험지는 그대로 동작한다 */ }
+  }catch(err){ /* 도구 실패 — 시험지 본체는 그대로 동작한다 */ }
 })();
 </script>
 </body></html>

@@ -362,6 +362,107 @@ body:not(.graded) .jump a[data-g]{display:none}
 @media (max-width:640px){
   .rail .picker{grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   국어 전용 v3 (2026-09-25) — 국어 시험지에만 붙는 UX 도구.
+   · 모드 선택(시험처럼 / 보면서)
+   · 45분 타이머 + 문항당 1.5분 페이스
+   · 작품·영역별 진행, 교과서 먼저 배너, 용어 대조 카드
+   · 논술형 글자 수 / 분량 목표 / 모범답안 잠금 / 채점 기준 상시 노출
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 모드 선택 ── */
+.modecard{background:var(--panel);box-shadow:var(--sh);border-radius:18px;padding:16px 18px;margin:16px 0 4px}
+.modecard .mc-h{font-size:14px;font-weight:800;margin-bottom:3px}
+.modecard .mc-s{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.modecard .mc-b{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.modecard .mc-b{grid-template-columns:1fr}}
+.modecard .mc-b button{display:block;width:100%;text-align:left;padding:13px 15px;border-radius:14px;
+  border:1px solid var(--rule);background:var(--soft);box-shadow:none;font-weight:500}
+.modecard .mc-b button:hover{border-color:var(--accent);background:var(--panel)}
+.modecard .mc-b b{display:block;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
+.modecard .mc-b button:hover b{color:var(--accent)}
+.modecard .mc-b span{display:block;font-size:11.5px;color:var(--muted);line-height:1.45;font-weight:400}
+.modechip{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:14px 0 2px}
+.modechip b{font-size:12px;font-weight:800;padding:3px 11px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.modechip button{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--rule);
+  background:transparent;box-shadow:none;font-weight:500;color:var(--muted)}
+.modechip button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── 타이머 (레일) ── */
+.krtimer{background:var(--soft);border-radius:14px;padding:11px 13px 10px}
+.krtimer .tm-top{display:flex;align-items:baseline;gap:7px}
+.krtimer .tm-clock{font-size:23px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.krtimer .tm-note{font-size:11px;color:var(--muted);margin-left:auto}
+.krtimer.over .tm-clock{color:var(--bad)}
+.krtimer .tm-bar{height:5px;border-radius:999px;background:var(--panel);overflow:hidden;margin:8px 0 9px}
+.krtimer .tm-bar i{display:block;height:100%;border-radius:999px;background:var(--accent);width:0}
+.krtimer.over .tm-bar i{background:var(--bad)}
+@media (prefers-reduced-motion:no-preference){.krtimer .tm-bar i{transition:width .9s linear}}
+.krtimer .tm-btns{display:flex;gap:6px}
+.krtimer .tm-btns button{flex:1;font:inherit;font-size:11.5px;font-weight:700;padding:6px 8px;border-radius:9px;
+  border:1px solid var(--rule);background:var(--panel);box-shadow:none;color:var(--ink2)}
+.krtimer .tm-btns button:hover{border-color:var(--accent);color:var(--accent)}
+.krtimer .tm-pace{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.45}
+.krtimer .tm-pace b{font-weight:700}
+.krtimer .tm-pace.ahead b{color:var(--ok)}
+.krtimer .tm-pace.behind b{color:var(--bad)}
+
+/* ── 작품·영역별 진행 (레일) ── */
+.krunits h3{margin:0 0 6px;font-size:11px;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.krunits a{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:9px;text-decoration:none;
+  color:var(--ink2);font-size:12px}
+.krunits a:hover{background:var(--soft);color:var(--accent)}
+.krunits a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.krunits .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.krunits .c{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
+.krunits a.full .c{color:var(--ok);font-weight:700}
+.krunits .dot{width:5px;height:5px;border-radius:50%;background:var(--track);flex:none}
+.krunits a.some .dot{background:var(--warn)}
+.krunits a.full .dot{background:var(--ok)}
+
+/* ── 교과서 먼저 배너 ── */
+.bookfirst{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);color:var(--ink);
+  border-radius:12px;padding:10px 14px;margin:6px 0 10px;font-size:12.5px;line-height:1.5}
+.bookfirst .bf-i{flex:none;font-size:13px;line-height:1.4}
+.bookfirst b{font-weight:700}
+
+/* ── 용어 대조 카드 ── */
+.termcard{background:var(--panel);box-shadow:var(--sh);border-radius:14px;padding:12px 15px;margin:6px 0 12px}
+.termcard .tc-h{font-size:12.5px;font-weight:800;margin-bottom:7px}
+.termcard table{width:100%;font-size:12px;margin:0;border-collapse:collapse}
+.termcard th,.termcard td{padding:5px 6px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.termcard th{font-size:10.5px;color:var(--muted);font-weight:700;white-space:nowrap}
+.termcard tr:last-child td{border-bottom:0}
+.termcard td:first-child{font-weight:700;white-space:nowrap}
+.termcard .tc-f{font-size:11.5px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.termcard .tc-f b{color:var(--ink)}
+
+/* ── 논술형 도구 ── */
+.esmeter{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);
+  margin:5px 0 0;font-variant-numeric:tabular-nums}
+.esmeter .cc{font-weight:700;color:var(--ink2);font-size:12.5px}
+.esmeter .tgt{margin-left:auto}
+.esmeter.short .cc{color:var(--warn)}
+.esmeter.ok .cc{color:var(--ok)}
+.model.locked > summary{color:var(--muted);cursor:not-allowed}
+.model.locked > summary::after{content:" 🔒";font-size:11px}
+.model.locked > .body{display:none}
+.critnow{display:none;margin:9px 0 0;padding:9px 13px;background:var(--soft);border-radius:11px;
+  font-size:12px;line-height:1.5}
+.graded .critnow{display:block}
+.critnow b{font-weight:700;color:var(--accent)}
+.selfhint{display:none;font-size:11.5px;color:var(--muted);margin-top:5px}
+.graded .selfhint{display:block}
+
+@media (max-width:980px){
+  .krtimer{margin-top:4px}
+  .krunits{display:none}
+}
+
+/* 계산·풀이 주의 배너 (교과서 배너와 같은 틀, 색만 다름) */
+.bookfirst.calc{background:var(--ok-bg);color:var(--ink)}
+.bookfirst.note{background:var(--soft);color:var(--ink)}
 </style>
 
 <header class="top"><div class="wrap">
@@ -654,6 +755,318 @@ loadSet(startId,false);renderOverall();
       if(t) setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'center'});},0);
     });
   }catch(err){ /* 레이아웃 개편 실패 시 원래 구조 그대로 둔다 */ }
+})();
+</script>
+<script>
+window.EXAM_TOOLS={
+  pfx:"hist-mid-2026",
+  durMin:45,
+  perMcSec:90,
+  progressTitle:"단원·영역별 진행",
+  trapUnit:"Ⅲ-1 고려의 건국과 정치 변화",
+  trapHTML:"<div class=\"termcard\"><div class=\"tc-h\">역사 선택형을 푸는 순서</div><table><thead><tr><th>순서</th><th>할 일</th></tr></thead><tbody><tr><td>1</td><td>발문의 <b>\"옳지 않은 것\"·\"모두 고른 것\"</b>에 밑줄을 친다</td></tr><tr><td>2</td><td>선지마다 <b>○×를 표시</b>하고 나서 답을 고른다</td></tr><tr><td>3</td><td>연표(사건 순서)를 떠올린다 — 순서·인과 문항은 연표로 풀린다</td></tr></tbody></table><p class=\"tc-f\">이 시험지는 2015 개정 중학 역사② <b>표준 내용</b>으로 만들었고, 미래엔(김태웅) 교과서의 세부 서술·자료(사료·지도·유물 사진)는 아직 대조하지 못했습니다. <b>자료가 제시되는 문항은 교과서로 직접 확인</b>하세요. 소단원 배분도 쪽수 비율에 따른 <b>[추정]</b>입니다.</p></div>",
+  banners:{
+  "Ⅲ-3 몽골의 간섭과 개혁": {
+    "icon": "🔀",
+    "kind": "note",
+    "html": "이 단원은 <b>헷갈리는 쌍</b>이 가장 많이 나옵니다 — 별무반/삼별초, 교정도감/정방, 권문세족/신진 사대부. 고르기 전에 둘의 차이를 한 줄로 말할 수 있는지 확인하세요."
+  },
+  "Ⅲ-4 고려의 생활과 문화": {
+    "icon": "📖",
+    "kind": "note",
+    "html": "문화·유물 문항은 교과서 <b>사진·자료</b>와 함께 나오는 경우가 많습니다. 의천/지눌, 삼국사기/삼국유사처럼 짝으로 묻는 것부터 정리하세요."
+  }
+}
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   시험지 공용 도구 v3 (2026-09-25)
+   과목별 설정은 이 스크립트 앞에서 window.EXAM_TOOLS 로 넘긴다.
+   기존 코드를 고치지 않고 DOM에 도구만 덧붙인다. 실패하면 조용히 빠진다.
+   ══════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  try{
+
+  var C=window.EXAM_TOOLS; if(!C) return;
+  var PFX=C.pfx;
+  var DUR=(C.durMin||45)*60*1000;
+  var PER_MC=(C.perMcSec||90)*1000;   /* 선택형 1문항당 기준 시간 = 오답 처방의 기준과 동일 */
+  var rail=document.querySelector('.rail');
+  var paper=document.querySelector('.paper');
+  var mcEl=document.getElementById('mc');
+  if(!rail||!paper||!mcEl) return;
+
+  function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function lsS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function curId(){return parseInt(ls(PFX+'-cur')||'1',10)||1;}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  var BANNERS=C.banners||{};        /* 단원 라벨 → 배너 HTML */
+  var TRAP_UNIT=C.trapUnit||'';     /* 함정 카드를 붙일 단원 라벨 */
+  var TRAP_HTML=C.trapHTML||'';
+  var PROG_TITLE=C.progressTitle||'단원·영역별 진행';
+
+  /* ═══════════ 1. 모드 (시험처럼 / 보면서) ═══════════ */
+  function modeKey(id){return PFX+'-mode'+id;}
+  function getMode(){return ls(modeKey(curId()));}
+  function setMode(m){lsS(modeKey(curId()),m);applyMode();}
+
+  var modeHost=document.createElement('div');
+  var setinfo=paper.querySelector('.setinfo');
+  if(setinfo&&setinfo.nextSibling) paper.insertBefore(modeHost,setinfo.nextSibling);
+  else paper.insertBefore(modeHost,paper.firstChild);
+
+  function renderMode(){
+    var m=getMode();
+    if(!m){
+      modeHost.innerHTML=
+        '<div class="modecard">'
+        +'<div class="mc-h">이 회차를 어떻게 풀까요?</div>'
+        +'<div class="mc-s">고른 방식은 이 회차에 저장됩니다. 나중에 바꿀 수 있습니다.</div>'
+        +'<div class="mc-b">'
+        +'<button type="button" data-mode="exam"><b>시험처럼 풀기</b>'
+        +'<span>45분 타이머가 바로 시작됩니다. 논술형 모범답안은 채점한 뒤에 열립니다.</span></button>'
+        +'<button type="button" data-mode="study"><b>보면서 풀기</b>'
+        +'<span>타이머는 직접 켭니다. 논술형 모범답안을 언제든 열어 보며 풀 수 있습니다.</span></button>'
+        +'</div></div>';
+    }else{
+      modeHost.innerHTML=
+        '<div class="modechip"><b>'+(m==='exam'?'시험 모드':'학습 모드')+'</b>'
+        +'<span>'+(m==='exam'?'45분 타이머 · 모범답안은 채점 후':'타이머 수동 · 모범답안 열람 자유')+'</span>'
+        +'<button type="button" data-mode="reset">방식 바꾸기</button></div>';
+    }
+  }
+  modeHost.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-mode]'); if(!b) return;
+    var m=b.dataset.mode;
+    if(m==='reset'){ try{localStorage.removeItem(modeKey(curId()));}catch(err){} tmStop(); renderMode(); applyMode(); return; }
+    setMode(m);
+    renderMode();
+    if(m==='exam') tmStart();
+    else tmStop();
+  });
+
+  /* ═══════════ 2. 45분 타이머 ═══════════ */
+  var tm=document.createElement('div');
+  tm.className='krtimer';
+  tm.innerHTML=
+    '<div class="tm-top"><span class="tm-clock" id="tmClock">45:00</span>'
+    +'<span class="tm-note" id="tmNote">45분</span></div>'
+    +'<div class="tm-bar"><i id="tmBar"></i></div>'
+    +'<div class="tm-btns"><button type="button" id="tmToggle">시작</button>'
+    +'<button type="button" id="tmReset">리셋</button></div>'
+    +'<div class="tm-pace" id="tmPace"></div>';
+  var jumpNav=rail.querySelector('.jump');
+  if(jumpNav&&jumpNav.nextSibling) rail.insertBefore(tm,jumpNav.nextSibling);
+  else rail.insertBefore(tm,rail.firstChild);
+
+  function tkey(){return PFX+'-timer'+curId();}
+  function tstate(){
+    try{var o=JSON.parse(ls(tkey())||'null');return (o&&typeof o==='object')?o:null;}catch(e){return null;}
+  }
+  function tsave(o){lsS(tkey(),JSON.stringify(o));}
+  function elapsed(){
+    var s=tstate(); if(!s) return 0;
+    return (s.acc||0)+(s.run?Date.now()-s.at:0);
+  }
+  function tmStart(){
+    var s=tstate()||{acc:0};
+    if(s.run) return;
+    s.run=true; s.at=Date.now(); tsave(s); tick();
+  }
+  function tmPause(){
+    var s=tstate(); if(!s||!s.run) return;
+    s.acc=(s.acc||0)+(Date.now()-s.at); s.run=false; delete s.at; tsave(s); tick();
+  }
+  function tmStop(){ try{localStorage.removeItem(tkey());}catch(e){} tick(); }
+  document.getElementById('tmToggle').addEventListener('click',function(){
+    var s=tstate(); if(s&&s.run) tmPause(); else tmStart();
+  });
+  document.getElementById('tmReset').addEventListener('click',function(){ tmStop(); });
+
+  function answered(){
+    var n=0;
+    mcEl.querySelectorAll('.q').forEach(function(q){ if(q.querySelector('.choices input:checked')) n++; });
+    return n;
+  }
+  function tick(){
+    var ms=elapsed(), left=DUR-ms, s=tstate();
+    var over=left<0, a=Math.abs(left);
+    var mm=Math.floor(a/60000), ss=Math.floor((a%60000)/1000);
+    var clock=document.getElementById('tmClock');
+    clock.textContent=(over?'+':'')+mm+':'+(ss<10?'0':'')+ss;
+    tm.classList.toggle('over',over);
+    document.getElementById('tmBar').style.width=Math.min(100,ms/DUR*100)+'%';
+    document.getElementById('tmToggle').textContent=(s&&s.run)?'일시정지':(ms?'이어서':'시작');
+    document.getElementById('tmNote').textContent=(s&&s.run)?'진행 중':(ms?'멈춤':'45분');
+
+    /* 문항당 1.5분 페이스 */
+    var pace=document.getElementById('tmPace');
+    var total=mcEl.querySelectorAll('.q').length||20;
+    if(ms<PER_MC){ pace.className='tm-pace';
+      pace.textContent='선택형 1문항 1.5분 기준 — 20문항 30분, 논술형 15분.'; return; }
+    var want=Math.min(total,Math.floor(ms/PER_MC)), got=answered(), d=got-want;
+    pace.className='tm-pace'+(d>=1?' ahead':d<=-2?' behind':'');
+    pace.innerHTML='지금쯤 <b>'+want+'번</b>까지 · 실제 <b>'+got+'문항</b> 답함'
+      +(d<=-2?' — 뒤처졌습니다. 모르는 문항은 넘기고 끝까지 가세요.'
+       :d>=1?' — 여유 있습니다.':'');
+  }
+  setInterval(tick,1000);
+
+  function applyMode(){
+    var m=getMode();
+    lockModels(m==='exam');
+  }
+
+  /* ═══════════ 3. 논술형 도구 ═══════════ */
+  /* 모범답안의 언어를 보고 단위를 고른다 — 영작 문항은 '자'가 아니라 '단어'로 센다 */
+  function measure(text,unit){
+    if(unit==='단어') return (text||'').trim().split(/\s+/).filter(Boolean).length;
+    return (text||'').replace(/\s+/g,'').length;
+  }
+  function modelSpec(details){
+    var body=details.querySelector('.body'); if(!body) return null;
+    var c=body.cloneNode(true);
+    c.querySelectorAll('.crit,.core').forEach(function(n){n.remove();});
+    var t=(c.textContent||'').trim();
+    var ascii=(t.match(/[A-Za-z]/g)||[]).length, han=(t.match(/[\uAC00-\uD7A3]/g)||[]).length;
+    /* 영작 문항(사실상 순수 영문)만 '단어'로 센다. 수학처럼 한글+수식이 섞인
+       모범답안은 '자'로 센다 — ascii 우세만 보면 수식 때문에 오판한다. */
+    var unit=(han<=2&&ascii>=8)?'단어':'자';
+    return {unit:unit, n:measure(t,unit)};
+  }
+  function buildES(){
+    var esEl=document.getElementById('es'); if(!esEl) return;
+    esEl.querySelectorAll('.q').forEach(function(q){
+      if(q.dataset.krTools) return;
+      q.dataset.krTools='1';
+      var ta=q.querySelector('textarea');
+      var det=q.querySelector('details.model');
+      if(!ta||!det) return;
+
+      var spec=modelSpec(det)||{unit:'자',n:0};
+      var target=spec.n, U=spec.unit;
+      var meter=document.createElement('div');
+      meter.className='esmeter';
+      meter.innerHTML='<span class="cc">0'+U+'</span>'
+        +'<span>'+(U==='자'?'공백 제외':'영작')+'</span>'
+        +'<span class="tgt">모범답안 '+target+U+'</span>';
+      ta.insertAdjacentElement('afterend',meter);
+
+      function upd(){
+        var n=measure(ta.value,U);
+        meter.querySelector('.cc').textContent=n+U;
+        meter.classList.remove('short','ok');
+        if(!n) return;
+        if(target&&n<target*0.5) meter.classList.add('short');
+        else if(target&&n>=target*0.7) meter.classList.add('ok');
+      }
+      ta.addEventListener('input',upd); upd();
+      ta.placeholder=(U==='단어')?'주어진 단어를 모두 쓰고 시제·수·어순을 확인하세요':'채점 기준의 키워드부터 쓰고 문장을 붙이세요';
+
+      /* 채점 기준을 자가채점 바로 위에 — 채점 후에만 보인다 */
+      var crit=det.querySelector('.crit');
+      var self=q.querySelector('.self');
+      if(crit&&self){
+        var box=document.createElement('div');
+        box.className='critnow';
+        box.innerHTML='<b>채점 기준</b> '+esc(crit.textContent.replace(/^채점 기준\(6점\):\s*/,''));
+        self.insertAdjacentElement('beforebegin',box);
+        var hint=document.createElement('div');
+        hint.className='selfhint';
+        hint.textContent='모범답안을 먼저 열어 대조한 뒤 점수를 고르세요. 키워드가 빠졌으면 후하게 주지 않습니다.';
+        self.insertAdjacentElement('afterend',hint);
+      }
+
+      /* 시험 모드에서 실수로 열지 못하게 */
+      det.addEventListener('click',function(e){
+        if(det.classList.contains('locked')){ e.preventDefault(); det.open=false; }
+      });
+    });
+    lockModels(getMode()==='exam');
+  }
+  function lockModels(on){
+    var graded=document.body.classList.contains('graded');
+    document.querySelectorAll('#es details.model').forEach(function(d){
+      var lock=on&&!graded;
+      d.classList.toggle('locked',lock);
+      if(lock) d.open=false;
+      var sm=d.querySelector('summary');
+      if(sm) sm.textContent=lock?'채점한 뒤에 열립니다':'모범 답안과 채점 기준 보기';
+    });
+  }
+
+  /* ═══════════ 4. 작품·영역별 진행 + 배너 + 용어 카드 ═══════════ */
+  var units=document.createElement('div');
+  units.className='krunits';
+  units.innerHTML='<h3>'+PROG_TITLE+'</h3><div class="ul"></div>';
+  if(tm.nextSibling) rail.insertBefore(units,tm.nextSibling); else rail.appendChild(units);
+
+  function groups(){
+    var out=[],cur=null;
+    Array.prototype.forEach.call(mcEl.children,function(el){
+      if(el.classList.contains('unit')){ cur={label:(el.textContent||'').trim(),el:el,qs:[]}; out.push(cur); }
+      else if(cur&&el.classList.contains('q')) cur.qs.push(el);
+    });
+    return out;
+  }
+  function decorate(){
+    groups().forEach(function(g,i){
+      if(!g.el.id) g.el.id='kru'+i;
+      if(g.el.dataset.krDone) return;
+      g.el.dataset.krDone='1';
+      var bf=BANNERS[g.label];
+      if(bf){
+        var b=document.createElement('div');
+        var ic='📖', txt=bf;
+        if(typeof bf==='object'){ ic=bf.icon||'📖'; txt=bf.html; }
+        b.className='bookfirst'+(typeof bf==='object'&&bf.kind?' '+bf.kind:'');
+        b.innerHTML='<span class="bf-i" aria-hidden="true">'+ic+'</span><span>'+txt+'</span>';
+        g.el.insertAdjacentElement('afterend',b);
+      }
+      if(TRAP_HTML&&g.label===TRAP_UNIT){
+        var t=document.createElement('div');
+        t.innerHTML=TRAP_HTML;
+        g.el.insertAdjacentElement('afterend',t.firstChild);
+      }
+    });
+  }
+  function updUnits(){
+    var gs=groups(), h='';
+    gs.forEach(function(g){
+      var n=g.qs.filter(function(q){return q.querySelector('.choices input:checked');}).length;
+      var cls=n===0?'':(n===g.qs.length?'full':'some');
+      h+='<a class="'+cls+'" href="#'+g.el.id+'">'
+        +'<span class="dot" aria-hidden="true"></span>'
+        +'<span class="n">'+esc(g.label.replace(/^\d-\(\d\)\s*/,''))+'</span>'
+        +'<span class="c">'+n+'/'+g.qs.length+'</span></a>';
+    });
+    units.querySelector('.ul').innerHTML=h;
+  }
+
+  /* ═══════════ 배선 ═══════════ */
+  function refresh(){ decorate(); buildES(); updUnits(); renderMode(); applyMode(); tick(); }
+
+  /* 회차가 다시 렌더될 때마다 */
+  new MutationObserver(function(){ setTimeout(refresh,0); })
+    .observe(mcEl,{childList:true});
+
+  /* 답을 고르면 진행·페이스 갱신 */
+  document.addEventListener('change',function(e){
+    if(e.target.matches&&e.target.matches('#mc .choices input')){ updUnits(); tick(); }
+  });
+
+  /* 채점하면 모범답안 잠금 해제 */
+  new MutationObserver(function(){ lockModels(getMode()==='exam'); })
+    .observe(document.body,{attributes:true,attributeFilter:['class']});
+
+  /* 회차를 처음 열 때 시험 모드면 타이머 자동 시작 */
+  refresh();
+  if(getMode()==='exam'&&!tstate()) tmStart();
+
+  }catch(err){ /* 도구 실패 — 시험지 본체는 그대로 동작한다 */ }
 })();
 </script>
 </body></html>
