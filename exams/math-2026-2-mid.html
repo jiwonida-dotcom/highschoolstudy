@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>수학 2학기 중간 예상시험</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
 <style>
 :root{
   --bg:#F6F7F4; --panel:#FFFFFF; --ink:#1B2430; --muted:#5C6773; --rule:#D8DDD9; --soft:#EEF2EE;
@@ -135,10 +135,156 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
 .hm .c.ok{background:var(--ok)}.hm .c.warn{background:var(--warn)}.hm .c.bad{background:var(--bad)}.hm .c.na{background:var(--soft);color:var(--muted)}
 .section-toggle{font-size:13px;color:var(--accent);cursor:pointer;background:none;border:0;padding:0;font-weight:500}
 </style>
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   v2 (2026-09-25) — exams/index.html 허브와 같은 디자인으로 통일.
+   위쪽 원본 CSS는 그대로 두고 토큰과 외형만 여기서 덮어쓴다.
+   클래스 이름은 하나도 바꾸지 않았으므로 기존 JS는 그대로 동작한다.
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#E3E1F8; --shell:#FFFFFF; --panel:#FFFFFF; --soft:#F0EBFE;
+  --ink:#14142B; --muted:#8E8CAB; --rule:#EDECF6; --track:#EFEAFE;
+  --accent:#6C3CE9; --accent-ink:#FFFFFF; --pink:#EC4899;
+  --ok:#047857; --ok-bg:#DCFAEC; --bad:#BE1D6C; --bad-bg:#FDE9F2; --warn:#A85B00; --warn-bg:#FDF0DA;
+  --serif:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --sh:0 3px 14px rgba(48,38,120,.07); --shell-sh:0 24px 60px rgba(48,38,120,.12);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#100E24; --shell:#1B1938; --panel:#242247; --soft:#2B2755;
+  --ink:#ECEAF8; --muted:#9A97C0; --rule:#322F5C; --track:#332F63;
+  --accent:#8B5CF6; --accent-ink:#150F2E; --pink:#DB2777;
+  --ok:#6EE7B7; --ok-bg:#123A2C; --bad:#F9A8D4; --bad-bg:#3B1B2C; --warn:#F0C070; --warn-bg:#3B2D14;
+  --sh:0 3px 14px rgba(0,0,0,.28); --shell-sh:0 24px 60px rgba(0,0,0,.45);
+}}
+:root[data-theme="dark"]{
+  --bg:#100E24; --shell:#1B1938; --panel:#242247; --soft:#2B2755;
+  --ink:#ECEAF8; --muted:#9A97C0; --rule:#322F5C; --track:#332F63;
+  --accent:#8B5CF6; --accent-ink:#150F2E; --pink:#DB2777;
+  --ok:#6EE7B7; --ok-bg:#123A2C; --bad:#F9A8D4; --bad-bg:#3B1B2C; --warn:#F0C070; --warn-bg:#3B2D14;
+  --sh:0 3px 14px rgba(0,0,0,.28); --shell-sh:0 24px 60px rgba(0,0,0,.45);
+}
+
+/* ── 앱 셸: 연보라 배경 위에 흰 카드 한 장 ── */
+body{background:var(--bg);font-size:15px;padding-inline:14px;padding-block:22px 56px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px}
+header.top{background:var(--shell);border-bottom:1px solid var(--rule);border-radius:26px 26px 0 0;
+  max-width:820px;margin:0 auto;padding:16px 26px 13px}
+header.top .wrap{max-width:none;margin:0}
+body>.wrap{background:var(--shell);border-radius:0 0 26px 26px;box-shadow:var(--shell-sh);
+  padding:2px 26px 30px}
+
+/* ── 헤더 ── */
+.eyebrow{text-transform:none;letter-spacing:.01em;font-size:12px}
+.back{border:0;background:var(--soft);color:var(--accent);font-weight:700;padding:4px 12px;border-radius:999px}
+.back:hover{background:var(--accent);color:var(--accent-ink)}
+h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:-.025em;margin:7px 0 0}
+.meta{font-size:12.5px;line-height:1.5;margin-top:5px}
+.stat{gap:18px}
+.stat b{font-family:var(--serif);font-size:24px;font-weight:800;letter-spacing:-.02em}
+.stat span{font-size:11.5px}
+
+/* ── 섹션 제목: 밑줄 대신 굵기로 ── */
+h2{font-family:var(--serif);font-size:16px;font-weight:800;letter-spacing:-.01em;
+  border-bottom:0;padding-bottom:0;margin:34px 0 12px}
+h2 small{font-size:12px}
+.unit{font-size:11px;font-weight:700;letter-spacing:.08em;margin:26px 0 2px}
+
+/* ── 안내문 · 바로가기 ── */
+.notice{background:var(--panel);box-shadow:var(--sh);border-left:3px solid var(--pink);
+  border-radius:0 14px 14px 0;padding:13px 17px;font-size:13.5px;margin:0 0 14px}
+.notice:last-of-type{margin-bottom:24px}
+.linkbar{font-size:12.5px;margin:14px 0 16px;color:var(--muted)}
+.linkbar a{color:var(--accent);font-weight:700;text-decoration:none;padding:2px 5px;border-radius:7px}
+.linkbar a:hover{background:var(--soft)}
+
+/* ── 회차 선택 ── */
+.picker{grid-template-columns:repeat(auto-fill,minmax(174px,1fr));gap:10px}
+.pick{border:0;background:var(--panel);box-shadow:var(--sh);border-radius:16px;padding:13px 15px;gap:4px}
+.pick:hover{box-shadow:0 5px 18px rgba(48,38,120,.12)}
+.pick .t{font-size:13.5px;font-weight:800}
+.pick .f{font-size:11.5px}
+.pick.cur{box-shadow:inset 0 0 0 2px var(--accent),var(--sh)}
+.pick .s{margin-top:auto;padding-top:4px}
+.pick .badge{border-radius:999px;font-weight:700;padding:1px 8px}
+/* 수학 도형: 보조선만 강조색, 본선은 본문색 */
+.fig .aux{stroke:var(--accent)}
+.fig .fill{fill:var(--soft);stroke:var(--ink)}
+.setinfo{margin:20px 0 4px}
+.setinfo .f{font-size:12.5px}
+
+/* ── 문항 ── */
+.q{padding:16px 0 12px}
+.q .stem{line-height:1.6}
+.q .stem .n{font-family:var(--serif);font-weight:800;color:var(--accent)}
+.box{border:1px solid var(--rule);background:var(--soft);border-radius:12px;padding:10px 14px}
+.choices label{border-radius:10px;padding:6px 9px}
+.choices label:hover{background:var(--soft)}
+.choices .c{border:1.5px solid var(--rule);color:var(--muted);font-weight:700}
+.choices input:checked + .c{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.graded .q.right .choices input:checked + .c{background:var(--ok);border-color:var(--ok);color:#fff}
+.graded .q.wrong .choices input:checked + .c{background:var(--bad);border-color:var(--bad);color:#fff}
+.tag{border-radius:999px;font-weight:700;padding:1px 9px}
+.exp{background:var(--soft);border-radius:12px;padding:11px 15px}
+.core{border-left:3px solid var(--accent);background:var(--panel);box-shadow:var(--sh);border-radius:0 12px 12px 0;padding:9px 12px}
+.rxq{background:var(--warn-bg);border-radius:12px;padding:9px 13px}
+.cause select{border:1px solid var(--rule);border-radius:9px;background:var(--panel)}
+.cause select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+textarea{border:1px solid var(--rule);border-radius:12px;background:var(--soft)}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.model summary{font-weight:700}
+.model .body{background:var(--soft);border-radius:12px;padding:10px 14px}
+
+/* ── 버튼 ── */
+button{border:1px solid var(--rule);border-radius:12px;background:var(--panel);box-shadow:var(--sh);
+  font-weight:700;padding:11px 20px}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);
+  box-shadow:0 8px 22px rgba(108,60,233,.26)}
+button.primary:hover{filter:brightness(1.07);color:var(--accent-ink)}
+.section-toggle{border:0;background:transparent;box-shadow:none;padding:0;font-weight:700}
+.section-toggle:hover{border:0}
+.hint{font-size:12.5px}
+
+/* ── 결과 리포트 ── */
+.score{background:var(--panel);border:0;box-shadow:var(--sh);border-radius:18px;padding:18px 22px}
+.score .big{font-family:var(--serif);font-size:48px;font-weight:800;letter-spacing:-.035em;
+  font-variant-numeric:normal}
+.score .big small{font-weight:600}
+.bar{height:8px;border-radius:999px;background:var(--track)}
+.bar i{border-radius:999px}
+.judge{border-radius:999px;font-weight:700;padding:2px 9px}
+table{font-size:13px}
+th{font-weight:700}
+.rx div{border:0;background:var(--panel);box-shadow:var(--sh);border-radius:14px;padding:12px 16px}
+details.gu{border:0;background:var(--panel);box-shadow:var(--sh);border-radius:16px;margin-bottom:10px}
+details.gu summary{padding:13px 16px;font-weight:700}
+.gbody{padding:0 16px 15px}
+ul.chk input{accent-color:var(--accent)}
+.hm div{border-radius:6px}
+.hm .c.na{background:var(--track)}
+pre.copy{border:1px solid var(--rule);background:var(--soft);border-radius:14px;padding:13px 16px}
+.more summary{font-weight:700}
+footer{border-top:1px solid var(--rule);font-size:11.5px;margin-top:34px;padding-top:14px}
+
+/* ── 좁은 화면 ── */
+@media (max-width:640px){
+  body{padding-inline:10px;padding-block:12px 40px}
+  header.top{padding:13px 16px 11px;border-radius:18px 18px 0 0}
+  body>.wrap{padding:2px 16px 24px;border-radius:0 0 18px 18px}
+  /* 고정 헤더가 화면을 잡아먹지 않게 압축 (범위 설명은 2줄까지만) */
+  h1{font-size:20px;margin-top:5px}
+  header.top .meta{font-size:11.5px;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;
+    -webkit-box-orient:vertical;overflow:hidden}
+  .stat{gap:14px;margin-top:2px}
+  .stat b{font-size:20px}
+  .score .big{font-size:38px}
+  .picker{grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
+}
+</style>
 
 <header class="top"><div class="wrap">
   <div>
-    <div class="eyebrow"><a class="back" href="https://claude.ai/code/artifact/e923f037-7c27-44cd-8788-0f93ef6b495c">← 과목 목록</a><span>비상교육 수학③ · 2학기 1차 정기고사 대비</span></div>
+    <div class="eyebrow"><a class="back" href="index.html">← 과목 목록</a><span>비상교육 수학③ · 2학기 1차 정기고사 대비</span></div>
     <h1>수학 2학기 중간 예상시험</h1>
     <div class="meta">Ⅳ. 삼각비(132~159쪽) · Ⅴ-1. 원과 직선(162~173쪽) · 대단원 학습평가 188~189 · 익힘책 236~238 · 11회분(11회는 익힘책 변형) · 각 선택형 20 + 논술형 3 · 45분</div>
   </div>
@@ -146,7 +292,7 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
 </div></header>
 
 <div class="wrap">
-<p class="linkbar">과목별 예상시험 바로가기: <a href="https://claude.ai/artifact/TvLqnkmqAuxkuaGe4ETfK4">국어</a> · <a href="https://claude.ai/code/artifact/faa95dfa-71d7-4b05-8468-889037c52133">과학</a> · <a href="https://claude.ai/artifact/FD3fT8FEDtzxvH7LfZojsS">수학</a> · <a href="https://claude.ai/artifact/S6nXNigjF11XjYDMjZRJRh">영어</a> · <a href="https://claude.ai/artifact/VLaFQwjZWuKrL7aAepha4x">역사</a></p>
+<p class="linkbar">과목별 예상시험 바로가기: <a href="korean-2026-2-mid.html">국어</a> · <a href="science-2026-2-mid.html">과학</a> · <a href="math-2026-2-mid.html">수학</a> · <a href="english-2026-2-mid.html">영어</a> · <a href="history-2026-2-mid.html">역사</a></p>
 <p class="notice">10회분 시험지입니다. <b>1회부터 순서대로</b> 푸는 것을 권하되, 채점 결과에서 약한 영역이 나오면 그 영역 집중 회차(3회 삼각비, 4회 활용, 5회 원과 직선, 6회 헷갈리는 쌍, 11회 익힘책 변형)를 골라 푸세요. 교과서·익힘책을 덮고 45분 알람을 맞춘 뒤 <b>문제마다 도형 그림이 있지만 실제 시험처럼 연습장에 한 번 더 그리며</b> 풀고, <b>채점하기</b>를 누르면 해설·영역별 정답률·보강 가이드가 나옵니다. 답은 근삿값이 아니라 <b>√를 남긴 정확한 값</b>(분모 유리화)입니다. 실제 기출이 아니라 범위와 문항 구성(선택형 20·논술형 3)에 맞춘 예상문제이며 배점은 임의입니다. 대단원 학습평가 188~189쪽에 원주각 문제가 섞여 있다면 그 부분이 범위에 포함되는지 선생님께 확인하세요(이 시험지는 원과 직선까지만 다룹니다).</p>
 
 <h2 style="font-size:17px;margin-top:8px">시험지 선택 <small>회차별 점수는 이 브라우저에 저장됩니다</small></h2>
@@ -196,7 +342,7 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid va
   <div class="actions" style="margin-top:8px"><button id="copyAll">전체 성적표 복사</button><span class="hint" id="copiedAll"></span></div>
 </section>
 
-<footer>배점은 임의(선택형 4점×20=80, 논술형 자가채점 18점→20점 환산)이며 실제 배점은 학교 평가계획서로 확인하세요. 실제 시험은 그림이 주어지지만 이 시험지는 글로만 제시하므로, 문제를 읽고 그림을 그리는 연습 자체가 시험 대비입니다. <a href="https://claude.ai/code/artifact/e923f037-7c27-44cd-8788-0f93ef6b495c" style="color:var(--accent)">과목 목록으로 돌아가기 →</a></footer>
+<footer>배점은 임의(선택형 4점×20=80, 논술형 자가채점 18점→20점 환산)이며 실제 배점은 학교 평가계획서로 확인하세요. 실제 시험은 그림이 주어지지만 이 시험지는 글로만 제시하므로, 문제를 읽고 그림을 그리는 연습 자체가 시험 대비입니다. <a href="index.html" style="color:var(--accent)">과목 목록으로 돌아가기 →</a></footer>
 </div>
 
 <script>
