@@ -287,11 +287,21 @@ footer{border-top:1px solid var(--rule);font-size:11.5px;margin-top:34px;padding
    ⚠ .paper / body>.wrap 에 position 을 주면 안 된다 — 기존 스크립트가
      offsetTop 으로 스크롤 위치를 계산한다.
    ══════════════════════════════════════════════════════════════════ */
-header.top{max-width:1040px}
-body>.wrap{max-width:1040px}
+/* 셸 폭은 허브(1180px)와 맞춘다 — 허브에서 시험지로 넘어갈 때 카드가 쪼그라들지 않게 */
+header.top{max-width:1180px}
+body>.wrap{max-width:1180px}
+/* 다만 '읽는 글'은 같이 늘리지 않는다. 한글 15px 기준 한 줄 45자 선을 지킨다.
+   표·히트맵·성적표는 넓은 쪽이 좋으므로 #report·#overall은 열 전체를 쓴다. */
+.lede .notice{max-width:760px}
+.lede .notice:last-of-type{margin-bottom:0}
+#mc .q,#es .q,.setinfo,.actions{max-width:760px}
+#mc .unit,.bookfirst,.termcard{max-width:760px}
 body>.wrap.v2-shell{display:grid;grid-template-columns:244px minmax(0,1fr);gap:0 26px;align-items:start;
   grid-template-areas:"lede lede" "rail main"}
-.lede{grid-area:lede;padding-top:10px}
+.lede{grid-area:lede;padding-top:10px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr))}
+/* 안내문이 2장이면 넓은 화면에서 나란히 — 한 장뿐이면 아래 max-width가 글줄을 묶는다 */
+.lede .notice{margin:0}
 .rail{grid-area:rail}
 .paper{grid-area:main;min-width:0;padding-top:2px}
 
